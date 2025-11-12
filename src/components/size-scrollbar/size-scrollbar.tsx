@@ -4,7 +4,7 @@ import {
   measure,
   type ScrollbarSize,
   scrollbarSize,
-} from '@technobuddha/library';
+} from '@technobuddha/library/browser';
 
 type DivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 

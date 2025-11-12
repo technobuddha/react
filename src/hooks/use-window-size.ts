@@ -1,6 +1,6 @@
 import React from 'react';
-import { type ElementSize, measureWindow } from '@technobuddha/library';
 import { throttle } from '@technobuddha/library';
+import { type ElementSize, measureWindow } from '@technobuddha/library/browser';
 
 /**
  * Gets the current window size, including the dimensions of the scroll bars.

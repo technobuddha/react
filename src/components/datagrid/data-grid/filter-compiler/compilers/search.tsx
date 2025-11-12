@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
 import React from 'react';
-import { Grid, TextField } from '@mui/material';
+import { GridLegacy as Grid, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import { type AnalyzerResults } from '../../analyzer.ts';
@@ -78,12 +79,10 @@ export function filterCompilerSearch<T = unknown>(
       }
 
       return (
-        // eslint-disable-next-line @typescript-eslint/no-deprecated
         <Grid className={css.root} container alignItems="flex-end">
           {/* <Grid className={css.gridIcon} item>
             <Search />
           </Grid> */}
-          {/* eslint-disable-next-line @typescript-eslint/no-deprecated */}
           <Grid item className={css.gridText}>
             <TextField
               classes={{ root: css.textfield }}
@@ -93,7 +92,6 @@ export function filterCompilerSearch<T = unknown>(
               value={search}
             />
           </Grid>
-          {/* eslint-disable-next-line @typescript-eslint/no-deprecated */}
           <Grid className={css.gridIcon} item>
             {/* {search !== '' && <Clear className={css.clear} onClick={handleClearClick} />} */}
           </Grid>

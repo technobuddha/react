@@ -1,3 +1,4 @@
+export { Anything, type AnythingParams } from './anything.tsx';
 export {
   type ColumnSpecification,
   DataGrid,

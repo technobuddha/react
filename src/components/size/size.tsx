@@ -1,5 +1,5 @@
 import React from 'react';
-import { type ElementSize, measure } from '@technobuddha/library';
+import { type ElementSize, measure } from '@technobuddha/library/browser';
 
 type DivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
