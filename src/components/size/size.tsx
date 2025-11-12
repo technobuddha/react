@@ -3,10 +3,12 @@ import { type ElementSize, measure } from '@technobuddha/library';
 
 type DivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
+export type SizeRenderProps = ElementSize;
+
 export type SizeProps = Omit<DivProps, 'children'> & {
   readonly width?: string | number;
   readonly height?: string | number;
-  children(this: void, props: ElementSize): React.ReactNode;
+  children(this: void, props: SizeRenderProps): React.ReactNode;
 };
 
 export const Size: React.FC<SizeProps> = ({ width = '100%', height = '100%', style, children }) => {
@@ -34,13 +36,11 @@ export const Size: React.FC<SizeProps> = ({ width = '100%', height = '100%', sty
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [div.current]);
 
-  const Children = children;
-
   return (
     <div style={{ ...style, width, height }} ref={div}>
       {state.width === 0 || state.height === 0 ?
         '\u00A0'
-      : <Children width={state.width} height={state.height} />}
+      : children({ width: state.width, height: state.height })}
     </div>
   );
 };

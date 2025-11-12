@@ -1,10 +1,11 @@
 import React from 'react';
 import { isNumber } from '@technobuddha/library';
+
 import {
   SizeScrollbar,
   type SizeScrollbarProps,
   type SizeScrollbarRenderProps,
-} from '@technobuddha/size';
+} from '../../size-scrollbar/index.tsx';
 
 import { type Column } from './column.ts';
 

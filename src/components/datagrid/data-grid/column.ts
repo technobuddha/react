@@ -12,6 +12,7 @@ export type Column<T = unknown> = {
 };
 
 export type ColumnName = string | number;
+
 export type ColumnWidth =
   | number
   | '*'

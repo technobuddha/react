@@ -1,1 +1,5 @@
-export { SizeScrollbar, type SizeScrollbarProps } from './size-scrollbar.tsx';
+export {
+  SizeScrollbar,
+  type SizeScrollbarProps,
+  type SizeScrollbarRenderProps,
+} from './size-scrollbar.tsx';

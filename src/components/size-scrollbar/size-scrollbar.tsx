@@ -8,6 +8,8 @@ import {
 
 type DivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
+export type SizeScrollbarRenderProps = ElementSize & ScrollbarSize;
+
 export type SizeScrollbarProps = Omit<DivProps, 'children'> & {
   readonly width?: string | number;
   readonly height?: string | number;

@@ -3,9 +3,10 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Size } from '@technobuddha/size';
 import clsx from 'clsx';
 import { FixedSizeList, type ListChildComponentProps } from 'react-window';
+
+import { Size } from '../../size/index.tsx';
 
 import { type Column } from './column.ts';
 import { type RowClasses, type RowStyles } from './column-styles.ts';
@@ -176,7 +177,7 @@ export function Grid<T = unknown>({
                 itemSize={rowHeight}
                 layout="vertical"
               >
-                {/* TODO any */}
+                {/* TODO [2025-11-30]: any */}
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {GridRow as any}
               </FixedSizeList>

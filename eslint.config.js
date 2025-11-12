@@ -19,28 +19,6 @@ const config = [
   app.lint({ files: ['src/**/*.ts'], ignores: [], tsConfig: 'src/tsconfig.json' }),
   // src
   app.lint({ files: ['src/**/*.tsx'], ignores: [], tsConfig: 'src/tsconfig.json', react: true }),
-  // wip/audio
-  app.lint({
-    files: ['wip/audio/**/*.ts'],
-    ignores: [],
-    environment: 'node',
-    tsConfig: 'wip/audio/tsconfig.json',
-  }),
-  // wip/datagrid
-  app.lint({
-    files: ['wip/datagrid/**/*.tsx'],
-    ignores: [],
-    environment: 'node',
-    tsConfig: 'wip/datagrid/tsconfig.json',
-    react: true,
-  }),
-  // wip/datagrid
-  app.lint({
-    files: ['wip/datagrid/**/*.ts'],
-    ignores: [],
-    environment: 'node',
-    tsConfig: 'wip/datagrid/tsconfig.json',
-  }),
 ];
 
 export default config;
