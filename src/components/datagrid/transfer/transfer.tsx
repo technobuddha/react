@@ -12,7 +12,7 @@ import {
   type OnSelectionChangedParams,
 } from '../data-grid/data-grid.tsx';
 import { DataGrid } from '../data-grid/data-grid.tsx';
-import { type FilterSpecification } from '../data-grid/filter-compiler/index.ts';
+import { type FilterSpecification } from '../data-grid/filter-compiler/filter-compiler.ts';
 
 import {
   type DispatchFunction,
@@ -21,41 +21,113 @@ import {
 } from './transfer-buttons.tsx';
 import TransferButtons from './transfer-buttons.tsx';
 
+/**
+ * Returns elements in array a that are not in array b.
+ *
+ * @typeParam T - The type of array elements
+ * @param a - The source array
+ * @param b - The array of elements to exclude
+ * @returns A new array containing elements from a that are not in b
+ * @internal
+ */
 function not<T = unknown>(a: T[], b: T[]): T[] {
   return a.filter((value) => !b.includes(value));
 }
 
+/**
+ * Props for the Transfer component.
+ *
+ * Defines properties for a dual-list transfer component that allows users
+ * to move items between two lists (available and selected).
+ *
+ * @typeParam T - The type of data items in the lists
+ * @group Components
+ * @category DataGrid
+ */
 export type TransferProps<T = unknown> = {
+  /** Optional CSS class name for the root element */
   readonly className?: string;
+  /** Optional inline style for the root element */
   readonly style?: React.CSSProperties;
+  /** Optional CSS class overrides for nested elements */
   readonly classes?: TransferClasses;
+  /** Optional inline style overrides for nested elements */
   readonly styles?: TransferStyles;
+  /** Optional fixed height for rows in pixels */
   readonly rowHeight?: number;
+  /** Array of items in the left (available) list */
   readonly left: T[];
+  /** Array of items in the right (selected) list */
   readonly right: T[];
+  /** Property name to display for each item */
   readonly name: string;
+  /** Optional title for the filter/search box */
   readonly title?: string;
+  /**
+   * Optional callback invoked when items are transferred
+   *
+   * @param left - Updated left list after transfer
+   * @param right - Updated right list after transfer
+   */
   onTransfer?(this: void, left: T[], right: T[]): void;
+  /** Children are not supported */
   readonly children?: never;
 };
 
-type TransferClasses = TransferClassesBase & {
+/**
+ * CSS class overrides for the Transfer component.
+ *
+ * @group Components
+ * @category DataGrid
+ */
+export type TransferClasses = TransferClassesBase & {
+  /** Classes for the data grid components */
   grid: DataGridClasses;
+  /** Classes for the transfer buttons */
   buttons: TransferButtonClasses;
 };
 
-type TransferStyles = TransferStylesBase & {
+/**
+ * Inline style overrides for the Transfer component.
+ *
+ * @group Components
+ * @category DataGrid
+ */
+export type TransferStyles = TransferStylesBase & {
+  /** Styles for the data grid components */
   grid: DataGridStyles;
+  /** Styles for the transfer buttons */
   buttons: TransferButtonStyles;
 };
 
-type TransferClassesBase = {
+/**
+ * Base CSS classes for Transfer component structure.
+ *
+ * @group Components
+ * @category DataGrid
+ */
+export type TransferClassesBase = {
+  /** Class for the root container */
   root: string;
+  /** Class for the grid container boxes */
   gridBox: string;
+  /** Class for the buttons container box */
   buttonsBox: string;
 };
-type TransferStylesBase = { [key in keyof TransferClassesBase]: React.CSSProperties };
 
+/**
+ * Base inline styles for Transfer component structure.
+ *
+ * @group Components
+ * @category DataGrid
+ */
+export type TransferStylesBase = { [key in keyof TransferClassesBase]: React.CSSProperties };
+
+/**
+ * Material-UI styles for the Transfer component.
+ *
+ * @internal
+ */
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -68,6 +140,50 @@ const useStyles = makeStyles({
   },
 });
 
+/**
+ * A dual-list transfer component for moving items between two lists.
+ *
+ * Displays two data grids side by side with transfer buttons between them,
+ * allowing users to move selected items from the left (available) list to
+ * the right (selected) list and vice versa.
+ *
+ * Features:
+ * - Two synchronized data grids with selection
+ * - Four transfer operations:
+ *   - Move all items right (available → selected)
+ *   - Move selected items right
+ *   - Move selected items left
+ *   - Move all items left (selected → available)
+ * - Search/filter capability for both lists
+ * - Row selection with checkboxes
+ * - Button states reflect current selection
+ * - Automatic filter clearing after transfer
+ *
+ * The component manages internal state for both lists and notifies the parent
+ * via the onTransfer callback when items are moved.
+ *
+ * @typeParam T - The type of data items in the lists
+ * @param props - Configuration props for the transfer component
+ * @returns A dual-list transfer interface
+ *
+ * @example
+ * ```tsx
+ * \<Transfer
+ *   left={availableUsers}
+ *   right={selectedUsers}
+ *   name="username"
+ *   title="Select Users"
+ *   rowHeight={40}
+ *   onTransfer={(left, right) => {
+ *     console.log('Available:', left);
+ *     console.log('Selected:', right);
+ *   }}
+ * /\>
+ * ```
+ *
+ * @group Components
+ * @category Transfer
+ */
 export function Transfer<T = unknown>({
   left: leftProp,
   right: rightProp,
@@ -224,4 +340,10 @@ export function Transfer<T = unknown>({
   );
 }
 
+/**
+ * Default export of the Transfer component.
+ *
+ * @group Components
+ * @category Transfer
+ */
 export default Transfer;

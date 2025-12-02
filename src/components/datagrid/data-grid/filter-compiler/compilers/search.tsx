@@ -11,9 +11,19 @@ import { searchExecute } from './execution.ts';
 import { normalizeFilterValue } from './normalization.ts';
 import { type CompilerOptions } from './options.ts';
 
+/**
+ * Options for creating a search text filter
+ *
+ * @group Components
+ * @category DataGrid
+ * @typeParam T - The data item type
+ */
 export type SearchCompilerOptions<T = unknown> = CompilerOptions & {
+  /** Filter type identifier */
   type: 'search';
+  /** The column name to filter */
   name: keyof T;
+  /** Placeholder text for the search field */
   title: string;
 };
 
@@ -43,6 +53,29 @@ const useSearchStyles = makeStyles((theme: any) => ({
   },
 }));
 
+/**
+ * Creates a text search filter with inline search field
+ *
+ * Displays a text field directly in the filter area for typing search queries.
+ * Filters data using case-insensitive substring matching. The search field shows
+ * a placeholder with the provided title.
+ *
+ * @param options - Configuration options for the search filter
+ * @param analyzerResults - Analysis results containing shape information
+ * @returns A Filter object with Actuator and execute functions
+ *
+ * @example
+ * ```tsx
+ * const filter = filterCompilerSearch(
+ *   { type: 'search', name: 'description', title: 'Search descriptions' },
+ *   analyzerResults
+ * );
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ * @typeParam T - The data item type
+ */
 export function filterCompilerSearch<T = unknown>(
   { name, title, clear }: SearchCompilerOptions<T>,
   { getShape }: AnalyzerResults<T>,

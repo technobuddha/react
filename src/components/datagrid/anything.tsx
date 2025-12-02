@@ -5,15 +5,35 @@ import clsx from 'clsx';
 
 import { type DataType } from './data-grid/index.ts';
 
+/**
+ * Props for the Anything component.
+ *
+ * Defines properties for rendering any JavaScript value with appropriate
+ * formatting and styling based on its type.
+ *
+ * @group Components
+ * @category Anything
+ */
 export type AnythingParams = {
+  /** Optional CSS class name to apply to the root element */
   readonly className?: string;
+  /** Optional data type hint for rendering the value */
   readonly type?: DataType;
+  /** Whether this is a top-level element. Affects styling for nested structures */
   readonly top?: boolean;
+  /** The value to render. Can be any JavaScript value including primitives, objects, and arrays */
   readonly children: unknown;
 };
 
+/**
+ * Material-UI theme interface for styling.
+ *
+ * @internal
+ */
 type Theme = {
+  /** Function to calculate spacing values */
   spacing(n: number): string;
+  /** Color palette for theming */
   readonly palette: Record<string, string>;
 };
 
@@ -81,10 +101,52 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
 }));
 
+/**
+ * Type guard to check if a value is a plain object (not a Date).
+ *
+ * @param value - The value to check
+ * @returns True if the value is an object but not a Date instance
+ *
+ * @internal
+ */
 function isNonDateObject(value: unknown): value is object {
   return isObject(value) && !isDate(value);
 }
 
+/**
+ * A versatile component for rendering any JavaScript value with appropriate formatting.
+ *
+ * Automatically detects and renders different data types with appropriate styling:
+ * - Null/undefined: Renders as non-breaking space
+ * - Arrays: Renders items horizontally with borders between elements
+ * - Objects: Renders key-value pairs with labeled keys
+ * - Dates: Renders as localized date strings
+ * - Numbers: Right-aligned primitive display
+ * - Other primitives: Left-aligned primitive display
+ *
+ * Nested structures are recursively rendered with appropriate visual hierarchy.
+ *
+ * @param props - The component props
+ * @returns A formatted representation of the value
+ *
+ * @example
+ * ```tsx
+ * \<Anything\>{42}\</Anything\>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * \<Anything type="date"\>{new Date()}\</Anything\>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * \<Anything\>{{ name: 'John', age: 30 }}\</Anything\>
+ * ```
+ *
+ * @group Components
+ * @category Anything
+ */
 export const Anything: React.FC<AnythingParams> = ({
   children,
   type,

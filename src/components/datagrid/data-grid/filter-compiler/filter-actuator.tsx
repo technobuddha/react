@@ -5,12 +5,28 @@ import clsx from 'clsx';
 
 import { type FilterActuatorClasses, type FilterActuatorStyles } from '../filter/index.ts';
 
+/**
+ * Props for the FilterActuator component
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export type FilterActuatorProps = {
+  /** Optional CSS class overrides for styling the actuator components */
   readonly classes?: FilterActuatorClasses;
+  /** Optional inline style overrides for the actuator components */
   readonly styles?: FilterActuatorStyles;
+  /** Callback function invoked when the filter button is clicked */
   onButtonClick?(this: void): void;
+  /** Optional icon component to display on the filter button */
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  readonly Icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  readonly Icon?: React.ComponentType<{
+    /** Optional CSS class name for the icon element */
+    className?: string;
+    /** Optional inline styles for the icon element */
+    style?: React.CSSProperties;
+  }>;
+  /** The title text to display on the filter button */
   readonly title: string;
 };
 
@@ -36,6 +52,28 @@ const useFilterActuatorStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * A button component that triggers filter actions in the DataGrid.
+ *
+ * Renders a styled button with optional icon and title text. When clicked,
+ * it invokes the provided callback to display filter UI or execute filter logic.
+ * Used by various filter compilers to provide a consistent filter activation interface.
+ *
+ * @param props - The component props
+ * @returns A styled button component for activating filters
+ *
+ * @example
+ * ```tsx
+ * \<FilterActuator
+ *   title="Filter Users"
+ *   Icon={FilterIcon}
+ *   onButtonClick={() => setDialogOpen(true)}
+ * /\>
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export const FilterActuator: React.FC<FilterActuatorProps> = ({
   classes,
   styles,

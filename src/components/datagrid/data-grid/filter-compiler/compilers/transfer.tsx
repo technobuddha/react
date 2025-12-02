@@ -4,7 +4,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { Transfer } from '../../../transfer/index.ts';
 
 import { type AnalyzerResults } from '../../analyzer.ts';
-import { type Filter, type FilterActuatorProps } from '../../filter/index.ts';
+import { type Filter, type FilterActuatorProps2 } from '../../filter/index.ts';
 import { useGrid } from '../../grid-context.tsx';
 
 import FilterActuator from '../filter-actuator.tsx';
@@ -15,18 +15,65 @@ import { equalityExecute } from './execution.ts';
 import { normalizeFilterArray } from './normalization.ts';
 import { type CompilerOptions } from './options.ts';
 
+/**
+ * Options for creating a transfer list filter
+ *
+ * @group Components
+ * @category DataGrid
+ * @typeParam T - The data item type
+ */
 export type TransferCompilerOptions<T = unknown> = CompilerOptions & {
+  /** Filter type identifier */
   type: 'transfer';
+  /** The column name to filter */
   name: keyof T;
+  /** Optional title for the filter dialog */
   title?: string;
+  /** Optional icon component for the filter button */
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  Icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  Icon?: React.ComponentType<{
+    /** Optional CSS class name for the icon element */
+    className?: string;
+    /** Optional inline styles for the icon element */
+    style?: React.CSSProperties;
+  }>;
 };
 
+/**
+ * Returns elements in array a that are not in array b
+ *
+ * @internal
+ * @param a - The source array
+ * @param b - The array of elements to exclude
+ * @returns Elements from a that are not in b
+ */
 function not<T>(a: T[], b: T[]): T[] {
   return a.filter((value) => !b.includes(value));
 }
 
+/**
+ * Creates a transfer list filter for moving items between available and selected lists
+ *
+ * Displays a dialog with a Transfer component showing two lists: available items on the left
+ * and selected items on the right. Users can move items between lists using transfer buttons.
+ * Only items in the right list are included in the filtered results.
+ *
+ * @param options - Configuration options for the transfer filter
+ * @param analyzerResults - Analysis results containing shape information
+ * @returns A Filter object with Actuator, Indicator, and execute functions
+ *
+ * @example
+ * ```tsx
+ * const filter = filterCompilerTransfer(
+ *   { type: 'transfer', name: 'status', title: 'Status' },
+ *   analyzerResults
+ * );
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ * @typeParam T - The data item type
+ */
 // TODO [2025-12-31]: implement the clear functionality
 export function filterCompilerTransfer<T = unknown>(
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -36,7 +83,7 @@ export function filterCompilerTransfer<T = unknown>(
   return {
     name,
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    Actuator({ classes, styles }: FilterActuatorProps) {
+    Actuator({ classes, styles }: FilterActuatorProps2) {
       const { data, changeFilter, filterValues } = useGrid<T>();
       const [open, setOpen] = React.useState<boolean>(false);
       const filterValue = React.useMemo(

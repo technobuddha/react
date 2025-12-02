@@ -22,6 +22,11 @@ import { type RowRenderer } from './row.tsx';
 import { Row } from './row.tsx';
 import { RowHeader } from './row-header.tsx';
 
+/**
+ * Material-UI styles for the Grid component.
+ *
+ * @internal
+ */
 const useGridStyles = makeStyles((theme) => ({
   actuators: {
     display: 'flex',
@@ -39,49 +44,153 @@ const useGridStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Props for the Grid component.
+ *
+ * Defines all configuration options for rendering the data grid including
+ * data, columns, styling, filtering, and interaction handlers.
+ *
+ * @typeParam T - The type of data items in the grid
+ * @group Components
+ * @category DataGrid
+ */
 export type GridProps<T = unknown> = {
+  /** Optional CSS class overrides for grid areas, rows, and filters */
   readonly classes?: GridClasses;
+  /** Optional inline style overrides for grid areas, rows, and filters */
   readonly styles?: GridStyles;
+  /** The array of data items to display in the grid */
   readonly data: T[];
+  /** Column definitions specifying how to render each column */
   readonly columns: Column<T>[];
+  /** Optional custom renderer for row cells */
   readonly rowRenderer?: RowRenderer;
+  /** Array of column widths in pixels, one per column */
   readonly columnWidths: number[];
+  /** Width of the scrollbar in pixels */
   readonly scrollbarWidth: number;
+  /** Width of the control column (e.g., for checkboxes or row numbers) in pixels */
   readonly controlWidth: number;
+  /** Optional fixed height for rows. If provided, enables virtualization */
   readonly rowHeight?: number;
+  /** Optional array of filter objects for filtering the grid data */
   readonly filters?: Filter<T>[];
+  /** Optional factory function for creating context menus */
   readonly menu?: MenuFactory<T>;
+  /** Children are not supported */
   readonly children?: never;
 };
 
+/**
+ * CSS class overrides for the Grid component.
+ *
+ * Allows customization of styling for different parts of the grid
+ * including filters, areas, rows, and columns.
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export type GridClasses = {
+  /** Classes for filter components */
   filter?: {
+    /** Classes for filter actuator buttons */
     actuator?: FilterActuatorClasses;
+    /** Classes for active filter indicators */
     indicator?: FilterIndicatorClasses;
   };
+  /** Classes for different grid areas */
   area?: GridAreaClasses;
+  /** Classes for row elements */
   row?: RowClasses;
+  /** Classes for column cells */
   column?: RowClasses['column'];
 };
 
+/**
+ * Inline style overrides for the Grid component.
+ *
+ * Allows customization of inline styles for different parts of the grid
+ * including filters, areas, rows, and columns.
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export type GridStyles = {
+  /** Styles for filter components */
   filter?: {
+    /** Styles for filter actuator buttons */
     actuator?: FilterActuatorStyles;
+    /** Styles for active filter indicators */
     indicator?: FilterIndicatorStyles;
   };
+  /** Styles for different grid areas */
   area?: GridAreaStyles;
+  /** Styles for row elements */
   row?: RowStyles;
+  /** Styles for column cells */
   column?: RowStyles['column'];
 };
 
-type GridAreaClasses = {
+/**
+ * CSS classes for different grid areas.
+ *
+ * @group Components
+ * @category DataGrid
+ */
+export type GridAreaClasses = {
+  /** Class for the filter actuators area */
   actuators?: string;
+  /** Class for the filter indicators area */
   indicators?: string;
+  /** Class for the header area */
   header?: string;
+  /** Class for the detail/data area */
   detail?: string;
 };
-type GridAreaStyles = { [key in keyof GridAreaClasses]: React.CSSProperties };
 
+/**
+ * Inline styles for different grid areas.
+ *
+ * @group Components
+ * @category DataGrid
+ */
+export type GridAreaStyles = { [key in keyof GridAreaClasses]: React.CSSProperties };
+
+/**
+ * The main Grid component for rendering tabular data.
+ *
+ * Renders a feature-rich data grid with:
+ * - Customizable columns with headers
+ * - Optional filters with actuators and indicators
+ * - Row virtualization when fixed row height is provided
+ * - Context menus for rows
+ * - Custom row renderers
+ * - Responsive sizing
+ *
+ * The grid automatically switches between virtualized rendering (for fixed row heights)
+ * and standard rendering (for dynamic row heights). Virtualization improves performance
+ * with large datasets by only rendering visible rows.
+ *
+ * @typeParam T - The type of data items in the grid
+ * @param props - The grid configuration props
+ * @returns A React element rendering the complete data grid
+ *
+ * @example
+ * ```tsx
+ * \<Grid
+ *   data={users}
+ *   columns={columns}
+ *   columnWidths={[200, 150, 100]}
+ *   rowHeight={40}
+ *   scrollbarWidth={15}
+ *   controlWidth={50}
+ *   filters={filters}
+ * /\>
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export function Grid<T = unknown>({
   classes,
   styles,

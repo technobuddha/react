@@ -2,17 +2,11 @@
   "name": "@technobuddha/react",
   "version": "0.0.7",
   "description": "Technobuddha React Library",
-  "license": "MIT",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "engines": {
-    "node": ">=24.0.0"
-  },
   "author": {
     "name": "Phil Hill",
     "email": "phil@technobuddha.com"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/technobuddha/react"
@@ -21,11 +15,16 @@
     "url": "https://github.com/technobuddha/react/issues"
   },
   "homepage": "https://github.com/technobuddha/react#readme",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "packageManager": "yarn@4.10.3",
   "technobuddhaProject": {
-    "version": "0.99.151",
-    "created": "2025-10-06T09:42:48.833Z",
-    "updated": "2025-11-12T00:25:27.442Z"
+    "version": "0.1.46",
+    "created": "2025-10-06T09:42:48.833Z"
   },
   "scripts": {
     "dev": "build dev",
@@ -35,7 +34,7 @@
   "dependencies": {
     "@mui/material": "7.3.5",
     "@mui/styles": "6.5.0",
-    "@technobuddha/library": "2.0.100",
+    "@technobuddha/library": "2.1.4",
     "@types/react-window": "1.8.8",
     "clsx": "2.1.1",
     "query-string": "9.3.1",
@@ -44,11 +43,11 @@
     "react-window": "1.8.11"
   },
   "devDependencies": {
-    "@technobuddha/builder": "0.99.24",
-    "@technobuddha/project": "0.99.152",
+    "@technobuddha/project": "0.1.0-45",
     "@types/jsdom": "^27",
     "@types/react": "19.2.3",
     "jsdom": "27.2.0",
+    "typedoc": "0.28.14",
     "vite": "7.2.2",
     "vitest": "4.0.8"
   }

@@ -6,16 +6,54 @@ import {
   scrollbarSize,
 } from '@technobuddha/library/browser';
 
-type DivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-
+/**
+ * Render props containing element dimensions and scrollbar measurements
+ *
+ * @group Components
+ * @category Size
+ */
 export type SizeScrollbarRenderProps = ElementSize & ScrollbarSize;
 
-export type SizeScrollbarProps = Omit<DivProps, 'children'> & {
+/**
+ * Props for the SizeScrollbar component
+ *
+ * @group Components
+ * @category Components
+ */
+export type SizeScrollbarProps = Omit<
+  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+  'children'
+> & {
+  /** Optional width of the container (default: '100%') */
   readonly width?: string | number;
+  /** Optional height of the container (default: '100%') */
   readonly height?: string | number;
+  /** Render prop function receiving element size and scrollbar dimensions */
   children(this: void, props: ElementSize & ScrollbarSize): React.ReactNode;
 };
 
+/**
+ * Component that provides element dimensions and scrollbar size to children via render props
+ *
+ * Uses ResizeObserver to track the container's size and measures the browser's scrollbar
+ * dimensions. Passes both measurements to the render prop function. Observes both the
+ * container element and document body for size changes.
+ *
+ * @param props - The component props
+ * @returns A div that tracks its size and provides dimensions to children
+ *
+ * @example
+ * ```tsx
+ * \<SizeScrollbar width="100%" height="400px"\>
+ *   {({ width, height, scrollbarWidth, scrollbarHeight }) => (
+ *     \<div\>Container: {width}x{height}, Scrollbar: {scrollbarWidth}x{scrollbarHeight}\</div\>
+ *   )}
+ * \</SizeScrollbar\>
+ * ```
+ *
+ * @group Components
+ * @category Size
+ */
 export const SizeScrollbar: React.FC<SizeScrollbarProps> = ({
   width = '100%',
   height = '100%',

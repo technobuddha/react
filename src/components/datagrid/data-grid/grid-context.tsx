@@ -10,26 +10,116 @@ import {
   setSortInQueryString,
 } from './query.ts';
 
+/**
+ * State interface for the grid context.
+ *
+ * Provides access to grid data, sort state, filter state, and methods
+ * to update sort and filter values.
+ *
+ * @typeParam T - The type of data items in the grid
+ * @internal
+ */
 type GridState<T = unknown> = {
+  /** The array of data items in the grid */
   data: T[];
+  /** Current sort configuration, if any */
   sort?: SortKey;
+  /**
+   * Function to change the sort order
+   *
+   * @param sort - Column name to sort by
+   */
   changeSort(this: void, sort: string): void;
+  /** Current filter values keyed by column name */
   filterValues: FilterValues<T>;
+  /**
+   * Function to update a filter value
+   *
+   * @param name - Column name to filter
+   * @param value - Filter value to apply
+   */
   changeFilter(this: void, name: keyof T, value: FilterValue): void;
 };
 
+/**
+ * React context for sharing grid state across components.
+ *
+ * @internal
+ */
 const GridContext = React.createContext<GridState>(null!);
+
+/**
+ * React hook to access the grid context.
+ *
+ * Provides access to grid data, current sort state, filter values,
+ * and functions to update sorting and filtering.
+ *
+ * @typeParam T - The type of data items in the grid
+ * @returns The current grid state
+ *
+ * @example
+ * ```typescript
+ * function MyComponent() {
+ *   const { sort, changeSort, filterValues } = useGrid\<User\>();
+ *   // Use grid state...
+ * }
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export function useGrid<T = unknown>(): GridState<T> {
   return React.useContext(GridContext) as GridState<T>;
 }
 
+/**
+ * Props for the GridProvider component.
+ *
+ * @typeParam T - The type of data items in the grid
+ * @internal
+ */
 type GridProviderProps<T = unknown> = {
+  /** The array of data items for the grid */
   readonly data: T[];
+  /** Optional default sort specification (e.g., 'name:asc' or 'age:desc') */
   readonly defaultSort?: string;
+  /** Whether to sync sort and filter state with URL query parameters */
   readonly useLocation?: boolean;
+  /** Child components to render within the provider */
   readonly children: React.ReactNode;
 };
 
+/**
+ * Context provider for grid state management.
+ *
+ * Manages sort and filter state for the data grid, with optional URL synchronization.
+ * When `useLocation` is enabled, sort and filter state is persisted to URL query
+ * parameters and restored on page load or browser navigation.
+ *
+ * Features:
+ * - Sort state management with toggle between ascending/descending
+ * - Filter state management for multiple columns
+ * - Optional URL query parameter synchronization
+ * - Browser history support (back/forward buttons)
+ *
+ * @typeParam T - The type of data items in the grid
+ * @param props - Configuration props for the provider
+ * @returns A context provider component
+ *
+ * @example
+ * ```tsx
+ * \<GridProvider
+ *   data={users}
+ *   defaultSort="name:asc"
+ *   useLocation={true}
+ * \>
+ *   \<DataGridContent /\>
+ * \</GridProvider\>
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export function GridProvider<T = unknown>({
   data,
   defaultSort,
@@ -109,4 +199,10 @@ export function GridProvider<T = unknown>({
   );
 }
 
+/**
+ * Default export of the useGrid hook.
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export default useGrid;

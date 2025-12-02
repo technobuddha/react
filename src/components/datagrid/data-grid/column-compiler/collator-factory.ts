@@ -3,10 +3,74 @@ import { isNumber, toDate, toNumber, toString } from '@technobuddha/library';
 import { type Shape } from '../analyzer.ts';
 import { type ColumnSpecification, type ColumnType } from '../column.ts';
 
+/**
+ * A comparer function that always returns 0.
+ *
+ * Used when no meaningful comparison can be performed.
+ *
+ * @returns Always returns 0
+ *
+ * @internal
+ */
 const nullComparer = (): number => 0;
+
+/**
+ * A collator factory that returns a no-op comparer.
+ *
+ * Used as a fallback when column sorting is not supported or applicable.
+ *
+ * @returns A function that returns a comparer that always returns 0
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export const nullCollator: () => () => number = () => nullComparer;
+
+/**
+ * Internationalized string collator for case-insensitive comparison.
+ *
+ * @internal
+ */
 const intlCollator = new Intl.Collator(undefined, { sensitivity: 'base' });
 
+/**
+ * Creates a collator function for sorting column data.
+ *
+ * Generates appropriate comparison functions based on the column's data shape and type.
+ * If a custom collator is defined in the column specification, it is used instead.
+ *
+ * The factory handles different data structures:
+ * - `key-value`: Extracts values from object properties
+ * - `array`: Extracts values from array indices
+ * - `primitive`/`polymorphic`: Compares values directly
+ *
+ * And different data types:
+ * - `string`/`array`: Uses locale-aware string comparison
+ * - `number`/`boolean`: Numeric comparison
+ * - `date`: Timestamp comparison
+ *
+ * Null and undefined values are consistently sorted to the end regardless of sort direction.
+ *
+ * @typeParam T - The type of data being sorted
+ * @param column - The column specification containing name and optional custom collator
+ * @param type - The detected data type of the column
+ * @param shape - The structural shape of the data (key-value, array, primitive, or polymorphic)
+ * @returns A factory function that takes a sort direction and returns a comparison function
+ *
+ * @example
+ * ```typescript
+ * const collator = collatorFactory(
+ *   { name: 'age' },
+ *   { dataType: 'number' },
+ *   'key-value'
+ * );
+ * const ascComparer = collator(true);
+ * const sorted = users.sort(ascComparer);
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export function collatorFactory<T = unknown>(
   column: ColumnSpecification<T>,
   type: ColumnType,

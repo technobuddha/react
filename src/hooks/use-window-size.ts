@@ -8,10 +8,13 @@ import { type ElementSize, measureWindow } from '@technobuddha/library/browser';
  * Also returns a `count` property, which increments each time the window is resized (since mount).
  *
  * @returns width, height, scrollbarWidth, scrollbarHeight, count
- * @group React
- * @category Hooks
+ * @group Hooks
+ * @category UseWindowSize
  */
-export function useWindowSize(): ElementSize & { count: number } {
+export function useWindowSize(): ElementSize & {
+  /** Number of times the window has been resized since component mount */
+  count: number;
+} {
   const isClient = globalThis.window !== undefined;
   const [count, setCount] = React.useState(0);
   const [size, setSize] = React.useState(() =>

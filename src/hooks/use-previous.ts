@@ -24,8 +24,8 @@ import { isFunction } from '@technobuddha/library';
  *   );
  * }
  * ```
- * @group React
- * @category Hooks
+ * @group Hooks
+ * @category UsePrevious
  */
 export function usePrevious<T>(value: T | ((prevValue: T | undefined) => T)): T | undefined {
   const ref = React.useRef<T | undefined>(undefined);

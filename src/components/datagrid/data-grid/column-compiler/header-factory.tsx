@@ -9,6 +9,11 @@ import { useGrid } from '../grid-context';
 import type { Shape } from '../analyzer';
 import type { ColumnSpecification, ColumnType, ColumnHeaderProps } from '../column';
 
+/**
+ * Material-UI styles for column headers.
+ *
+ * @internal
+ */
 const useHeaderStyles = makeStyles((theme) => ({
   button: {
     padding: '4px 0',
@@ -35,6 +40,37 @@ const useHeaderStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Creates a column header renderer function.
+ *
+ * Generates a React component for rendering column headers in the DataGrid.
+ * If the column specification provides a custom header component, it is used directly.
+ * Otherwise, a default sortable button header is created with the following features:
+ * - Click to sort (if sorting is enabled for the column)
+ * - Sort direction indicators (up/down arrows or neutral icon)
+ * - Customizable styling through classes and styles props
+ *
+ * The default header displays the column name or a custom header text string,
+ * along with sort indicators when the column is sortable.
+ *
+ * @typeParam T - The type of data in the grid
+ * @param column - The column specification containing name, header, and sort configuration
+ * @param _type - The detected data type of the column (unused in current implementation)
+ * @param _shape - The structural shape of the data (unused in current implementation)
+ * @returns A render function that accepts ColumnHeaderProps and returns a React element
+ *
+ * @example
+ * ```typescript
+ * const headerRenderer = headerFactory(
+ *   { name: 'username', header: 'User Name', sortBy: 'username' },
+ *   { dataType: 'string' },
+ *   'key-value'
+ * );
+ * ```
+ *
+ * @group Components
+ * @category DataGrid
+ */
 export function headerFactory<T = unknown>(
   column: ColumnSpecification<T>,
   _type: ColumnType,

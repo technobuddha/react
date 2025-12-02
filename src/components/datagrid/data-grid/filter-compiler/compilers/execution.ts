@@ -5,6 +5,23 @@ import { type FilterValue } from '../../filter/index.ts';
 
 import { normalizeFilterArray, normalizeFilterValue } from './normalization.ts';
 
+/**
+ * Creates a filter execution function for text search filtering
+ *
+ * Returns a function that filters data by checking if field values contain
+ * the search string (case-insensitive). Handles different data shapes:
+ * - key-value: searches object properties
+ * - array: searches array elements by index
+ * - primitive/polymorphic: searches the datum directly
+ *
+ * @param name - The column name or index to filter
+ * @param shape - The data shape (key-value, array, primitive, polymorphic)
+ * @returns A filter execution function that performs text search
+ *
+ * @group Components
+ * @category DataGrid
+ * @typeParam T - The data item type
+ */
 export function searchExecute<T = unknown>(
   name: keyof T,
   shape: Shape,
@@ -69,6 +86,23 @@ export function searchExecute<T = unknown>(
   }
 }
 
+/**
+ * Creates a filter execution function for exact equality filtering
+ *
+ * Returns a function that filters data by checking if field values exactly match
+ * any of the selected filter values. Handles different data shapes:
+ * - key-value: checks object properties for exact matches
+ * - array: checks array elements by index for exact matches
+ * - primitive/polymorphic: checks the datum directly for exact matches
+ *
+ * @param name - The column name or index to filter
+ * @param shape - The data shape (key-value, array, primitive, polymorphic)
+ * @returns A filter execution function that performs equality comparison
+ *
+ * @group Components
+ * @category DataGrid
+ * @typeParam T - The data item type
+ */
 export function equalityExecute<T = unknown>(
   name: keyof T,
   shape: Shape,

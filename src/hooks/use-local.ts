@@ -23,8 +23,8 @@ import { isFunction } from '@technobuddha/library';
  *   );
  * }
  * ```
- * @group React
- * @category Hooks
+ * @group Hooks
+ * @category UseLocal
  */
 export function useLocal<T>(initialState: T | (() => T)): [T, (set: T | ((prev: T) => T)) => void] {
   const localRef = React.useRef<T>(isFunction(initialState) ? initialState() : initialState);

@@ -73,7 +73,3 @@ export function columnCompiler<T = unknown>(
 
   return cols;
 }
-
-export { collatorFactory } from './collator-factory.ts';
-export { headerFactory } from './header-factory.tsx';
-export { rendererFactory } from './renderer-factory.tsx';
