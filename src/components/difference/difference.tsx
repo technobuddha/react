@@ -44,11 +44,13 @@ export const Difference: React.FC<DifferenceProps> = ({ diffs }) => (
     {diffs.map((diff) => {
       switch (diff.op) {
         case DIFFERENCE_EQUAL: {
+          // eslint-disable-next-line react-hooks/purity
           return <span key={Math.random()}>{diff.text}</span>;
         }
 
         case DIFFERENCE_INSERT: {
           return (
+            // eslint-disable-next-line react-hooks/purity
             <ins key={Math.random()} style={{ backgroundColor: '#e6ffe6', textDecoration: 'none' }}>
               {diff.text}
             </ins>
@@ -57,6 +59,7 @@ export const Difference: React.FC<DifferenceProps> = ({ diffs }) => (
 
         case DIFFERENCE_DELETE: {
           return (
+            // eslint-disable-next-line react-hooks/purity
             <del key={Math.random()} style={{ backgroundColor: '#ffe6e6' }}>
               {diff.text}
             </del>

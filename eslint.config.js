@@ -1,3 +1,6 @@
+// 🚨
+// 🚨 CHANGES TO THIS FILE WILL BE OVERRIDDEN
+// 🚨
 // @ts-check
 // 🚨
 // 🚨 CHANGES TO THIS FILE WILL BE OVERRIDDEN

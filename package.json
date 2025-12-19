@@ -1,40 +1,33 @@
 {
   "name": "@technobuddha/react",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Technobuddha React Library",
-  "author": {
-    "name": "Phil Hill",
-    "email": "phil@technobuddha.com"
-  },
+  "author": { "name": "Phil Hill", "email": "phil@technobuddha.com" },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/technobuddha/react"
-  },
-  "bugs": {
-    "url": "https://github.com/technobuddha/react/issues"
-  },
+  "repository": { "type": "git", "url": "https://github.com/technobuddha/react" },
+  "bugs": { "url": "https://github.com/technobuddha/react/issues" },
   "homepage": "https://github.com/technobuddha/react#readme",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "engines": {
-    "node": ">=24.0.0"
-  },
+  "engines": { "node": ">=24.0.0" },
   "packageManager": "yarn@4.10.3",
-  "technobuddhaProject": {
-    "version": "0.1.0-45",
-    "created": "2025-10-06T09:42:48.833Z"
-  },
+  "technobuddhaProject": { "created": "2025-10-06T09:42:48.833Z" },
   "scripts": {
     "dev": "build dev",
     "build": "build prod",
-    "publish": "build publish"
+    "publish": "build publish",
+    "start": "build default",
+    "test": "npx vitest --typecheck run",
+    "test:watch": "npx vitest --typecheck --no-coverage watch",
+    "test:full": "npx vitest --typecheck --mode=full run",
+    "lint": "npx eslint src",
+    "spell": "npx cspell lint src"
   },
   "dependencies": {
     "@mui/material": "7.3.5",
     "@mui/styles": "6.5.0",
-    "@technobuddha/library": "2.1.4",
+    "@technobuddha/library": "2.1.0-26",
     "@types/react-window": "1.8.8",
     "clsx": "2.1.1",
     "query-string": "9.3.1",
@@ -43,7 +36,7 @@
     "react-window": "1.8.11"
   },
   "devDependencies": {
-    "@technobuddha/project": "0.1.0-45",
+    "@technobuddha/project": "0.1.0-100",
     "@types/jsdom": "^27",
     "@types/react": "19.2.3",
     "jsdom": "27.2.0",

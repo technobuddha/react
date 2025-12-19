@@ -11,7 +11,7 @@ const config = {
         name: 'React',
         directory: './src',
         command: 'tsc --build src',
-        daemon: true,
+        context: 'daemon',
       },
     ],
   },
