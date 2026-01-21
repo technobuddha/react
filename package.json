@@ -2,17 +2,29 @@
   "name": "@technobuddha/react",
   "version": "0.0.8",
   "description": "Technobuddha React Library",
-  "author": { "name": "Phil Hill", "email": "phil@technobuddha.com" },
+  "author": {
+    "name": "Phil Hill",
+    "email": "phil@technobuddha.com"
+  },
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/technobuddha/react" },
-  "bugs": { "url": "https://github.com/technobuddha/react/issues" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/technobuddha/react"
+  },
+  "bugs": {
+    "url": "https://github.com/technobuddha/react/issues"
+  },
   "homepage": "https://github.com/technobuddha/react#readme",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "engines": { "node": ">=24.0.0" },
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "packageManager": "yarn@4.10.3",
-  "technobuddhaProject": { "created": "2025-10-06T09:42:48.833Z" },
+  "technobuddhaProject": {
+    "created": "2025-10-06T09:42:48.833Z"
+  },
   "scripts": {
     "dev": "build dev",
     "build": "build prod",
@@ -22,7 +34,8 @@
     "test:watch": "npx vitest --typecheck --no-coverage watch",
     "test:full": "npx vitest --typecheck --mode=full run",
     "lint": "npx eslint src",
-    "spell": "npx cspell lint src"
+    "spell": "npx cspell lint src",
+    "preinstall": "git config core.hooksPath git-hooks"
   },
   "dependencies": {
     "@mui/material": "7.3.5",
@@ -36,7 +49,7 @@
     "react-window": "1.8.11"
   },
   "devDependencies": {
-    "@technobuddha/project": "0.1.0-100",
+    "@technobuddha/project": "0.1.0-237",
     "@types/jsdom": "^27",
     "@types/react": "19.2.3",
     "jsdom": "27.2.0",
