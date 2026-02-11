@@ -1,6 +1,6 @@
 {
   "name": "@technobuddha/react",
-  "version": "0.0.8",
+  "version": "0.0.15",
   "description": "Technobuddha React Library",
   "author": {
     "name": "Phil Hill",
@@ -26,8 +26,7 @@
     "created": "2025-10-06T09:42:48.833Z"
   },
   "scripts": {
-    "dev": "build dev",
-    "build": "build prod",
+    "build": "build build",
     "publish": "build publish",
     "start": "build default",
     "test": "npx vitest --typecheck run",
@@ -38,17 +37,23 @@
     "preinstall": "git config core.hooksPath git-hooks"
   },
   "dependencies": {
-    "@mui/material": "7.3.5",
-    "@mui/styles": "6.5.0",
-    "@types/react-window": "1.8.8",
     "clsx": "2.1.1",
     "query-string": "9.3.1",
-    "react": "19.2.0",
-    "react-icons": "5.5.0",
     "react-window": "1.8.11"
   },
   "devDependencies": {
-    "@technobuddha/project": "0.1.0-297",
-    "@types/react": "19.2.3"
+    "@mui/material": "7.3.7",
+    "@mui/styles": "6.4.8",
+    "@technobuddha/project": "0.1.0-341",
+    "@types/react": "19.2.13",
+    "@types/react-window": "1.8.8",
+    "react": "19.2.4",
+    "react-icons": "5.5.0"
+  },
+  "peerDependencies": {
+    "@mui/material": "^7.3.7",
+    "@mui/styles": "^6.4.8",
+    "react": "^19.2.4",
+    "react-icons": "^5.5.0"
   }
 }

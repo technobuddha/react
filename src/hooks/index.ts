@@ -1,3 +1,4 @@
+export { useConst } from './use-const.ts';
 export { useDerivedState } from './use-derived-state.ts';
 export { useHMR } from './use-hmr.ts';
 export { useLocal } from './use-local.ts';

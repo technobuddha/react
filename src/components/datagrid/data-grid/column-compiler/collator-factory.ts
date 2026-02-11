@@ -129,7 +129,7 @@ export function collatorFactory<T = unknown>(
                       0
                     : 1
                   : yy == null ? -1
-                  : toNumber(xx as string) - toNumber(yy as string)
+                  : toNumber(xx as number) - toNumber(yy as number)
                 );
               }
             : (x: T, y: T) => {
@@ -228,7 +228,7 @@ export function collatorFactory<T = unknown>(
                       0
                     : 1
                   : yy == null ? -1
-                  : toNumber(xx as string) - toNumber(yy as string)
+                  : toNumber(xx as number) - toNumber(yy as number)
                 );
               }
             : (x: T, y: T) => {
@@ -240,7 +240,7 @@ export function collatorFactory<T = unknown>(
                       0
                     : -1
                   : xx == null ? 1
-                  : toNumber(yy as string) - toNumber(xx as string)
+                  : toNumber(yy as number) - toNumber(xx as number)
                 );
               };
         }
@@ -313,14 +313,14 @@ export function collatorFactory<T = unknown>(
                     0
                   : 1
                 : y == null ? -1
-                : toNumber(x as string) - toNumber(y as string)
+                : toNumber(x as number) - toNumber(y as number)
             : (x: T, y: T) =>
                 y == null ?
                   x == null ?
                     0
                   : -1
                 : x == null ? 1
-                : toNumber(y as string) - toNumber(x as string);
+                : toNumber(y as number) - toNumber(x as number);
         }
 
         case 'date': {
