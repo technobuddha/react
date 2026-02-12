@@ -5,7 +5,6 @@
 
 /** @type import('typedoc').TypeDocOptions */
 const config = {
-// typedoc
   // Configuration
   name: 'react',
   tsconfig: 'src/tsconfig.typedoc.json',

@@ -10,7 +10,7 @@ const config = {
         name: 'React',
         command: 'npx tsc --build src',
       },
-    ]
+    ],
   },
   publish: {
     steps: [
@@ -22,9 +22,9 @@ const config = {
       {
         name: 'Publish',
         command: 'yarn npm publish --access public',
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
 
 export default config;

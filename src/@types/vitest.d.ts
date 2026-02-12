@@ -6,7 +6,6 @@ declare module 'vitest' {
     /**/
   }
   interface AsymmetricMatchersContaining<T = unknown>
-    extends JestExtended<T>,
-      JestMatcherDeepCloseTo<T> {}
+    extends JestExtended<T>, JestMatcherDeepCloseTo<T> {}
   interface ExpectStatic extends JestExtended, JestMatcherDeepCloseTo {}
 }
