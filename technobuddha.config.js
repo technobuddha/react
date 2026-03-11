@@ -6,6 +6,11 @@ const config = {
       environment: 'vite-client',
     },
   },
+  lint: {
+    rules: {
+      'no-bitwise': { rule: 'off' },
+    }
+  }
 };
 
 export default config;

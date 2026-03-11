@@ -44,7 +44,7 @@
   "devDependencies": {
     "@mui/material": "7.3.7",
     "@mui/styles": "6.4.8",
-    "@technobuddha/project": "0.1.0-364",
+    "@technobuddha/project": "0.1.0-418",
     "@types/react": "19.2.13",
     "@types/react-window": "1.8.8",
     "react": "19.2.4",
