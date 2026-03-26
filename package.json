@@ -1,6 +1,6 @@
 {
   "name": "@technobuddha/react",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Technobuddha React Library",
   "author": {
     "name": "Phil Hill",
@@ -42,13 +42,13 @@
     "react-window": "1.8.11"
   },
   "devDependencies": {
-    "@mui/material": "7.3.7",
-    "@mui/styles": "6.4.8",
-    "@technobuddha/project": "0.1.0-418",
-    "@types/react": "19.2.13",
+    "@mui/material": "7.3.9",
+    "@mui/styles": "6.5.0",
+    "@technobuddha/project": "0.1.0-446",
+    "@types/react": "19.2.14",
     "@types/react-window": "1.8.8",
     "react": "19.2.4",
-    "react-icons": "5.5.0"
+    "react-icons": "5.6.0"
   },
   "peerDependencies": {
     "@mui/material": "^7.3.7",

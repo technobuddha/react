@@ -3,16 +3,6 @@
 // 🚨
 // @ts-check
 import { app } from '@technobuddha/project';
+import { defineConfig } from 'eslint/config';
 
-/** @type import('eslint').Linter.Config[] */
-const config = [
-  { ignores: ['coverage', 'dist'] },
-  // .
-  app.lint({ files: ['*.config.js'], ignores: [], environment: 'node' }),
-  // src
-  app.lint({ files: ['src/**/*.ts'], ignores: [], tsConfig: 'src/tsconfig.json' }),
-  // src
-  app.lint({ files: ['src/**/*.tsx'], ignores: [], tsConfig: 'src/tsconfig.json', react: true }),
-];
-
-export default config;
+export default defineConfig([app.lint({ files: ['*.config.js'], environment: 'node' })]);
