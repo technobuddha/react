@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import { Checkbox } from '@mui/material';
 
@@ -13,7 +12,6 @@ type BaseSelectionIndicatorProps = {
   /** Optional CSS class name for the checkbox */
   readonly className?: string;
   /** Optional inline style for the checkbox (currently unused) */
-  // eslint-disable-next-line react/no-unused-prop-types
   readonly style?: React.CSSProperties;
   /** Children are not supported */
   readonly children?: never;
@@ -140,7 +138,7 @@ export function MasterSelectionIndicator<T = unknown>({
     (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
       setSelected(data, checked);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
     [data],
   );
 

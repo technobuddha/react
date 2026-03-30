@@ -1,6 +1,6 @@
 {
   "name": "@technobuddha/react",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Technobuddha React Library",
   "author": {
     "name": "Phil Hill",
@@ -19,16 +19,16 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=25.0.0"
   },
   "packageManager": "yarn@4.12.0",
   "technobuddhaProject": {
     "created": "2025-10-06T09:42:48.833Z"
   },
   "scripts": {
-    "build": "build build",
+    "build": "build default",
     "publish": "build publish",
-    "start": "build default",
+    "start": "build dev",
     "test": "npx vitest --typecheck run",
     "test:watch": "npx vitest --typecheck --no-coverage watch",
     "test:full": "npx vitest --typecheck --mode=full run",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@mui/material": "7.3.9",
     "@mui/styles": "6.5.0",
-    "@technobuddha/project": "0.1.0-446",
+    "@technobuddha/project": "0.1.0-461",
     "@types/react": "19.2.14",
     "@types/react-window": "1.8.8",
     "react": "19.2.4",

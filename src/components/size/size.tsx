@@ -72,32 +72,32 @@ export type SizeProps = Omit<
  * @category Size
  */
 export const Size: React.FC<SizeProps> = ({ width = '100%', height = '100%', style, children }) => {
-  const [state, setState] = React.useState<ElementSize>({ width: 0, height: 0 });
-  const div = React.useRef<HTMLDivElement>(null);
+  const [state, setState] = React.useState({ width: 0, height: 0 });
+  const divRef = React.useRef<HTMLDivElement>(null);
   const observer = React.useMemo(
     () =>
       new ResizeObserver(() => {
-        if (div.current) {
-          setState(measure(div.current));
+        if (divRef.current) {
+          setState(measure(divRef.current));
         }
       }),
     [],
   );
 
   React.useEffect(() => {
-    if (div.current) {
-      observer.observe(div.current);
+    if (divRef.current) {
+      observer.observe(divRef.current);
     }
     observer.observe(document.body);
 
     return () => {
       observer.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [div.current]);
+    // eslint-disable-next-line react/exhaustive-deps, react/refs
+  }, [divRef.current]);
 
   return (
-    <div style={{ ...style, width, height }} ref={div}>
+    <div style={{ ...style, width, height }} ref={divRef}>
       {state.width === 0 || state.height === 0 ?
         '\u00A0'
       : children({ width: state.width, height: state.height })}

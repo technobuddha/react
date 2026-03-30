@@ -197,23 +197,27 @@ export function Transfer<T = unknown>({
   styles,
 }: TransferProps<T>): React.ReactElement {
   const css = useStyles();
-  const dispatch = React.useRef<DispatchFunction | null>(null);
+  const dispatchRef = React.useRef<DispatchFunction | null>(null);
   const [left, setLeft] = useDerivedState(leftProp, [leftProp]);
   const [right, setRight] = useDerivedState(rightProp, [rightProp]);
   const selected = React.useMemo(
     () => ({ left: [] as T[], right: [] as T[] }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
     [leftProp, rightProp],
   );
   const columns = React.useMemo(() => [{ name } as ColumnSpecification<T>], [name]);
-  const clearR = React.useRef<() => void>(null);
-  const clearL = React.useRef<() => void>(null);
+  const clearRRef = React.useRef<() => void>(null);
+  const clearLRef = React.useRef<() => void>(null);
   const filtersR = React.useMemo(
-    () => [{ type: 'search', name, title: title ?? name, clear: clearR } as FilterSpecification<T>],
+    () => [
+      { type: 'search', name, title: title ?? name, clear: clearRRef } as FilterSpecification<T>,
+    ],
     [name, title],
   );
   const filtersL = React.useMemo(
-    () => [{ type: 'search', name, title: title ?? name, clear: clearL } as FilterSpecification<T>],
+    () => [
+      { type: 'search', name, title: title ?? name, clear: clearLRef } as FilterSpecification<T>,
+    ],
     [name, title],
   );
   const isLeftSelected = React.useCallback((datum: T) => selected.left.includes(datum), [selected]);
@@ -225,7 +229,7 @@ export function Transfer<T = unknown>({
   const handleSelectionChangedLeft = React.useCallback(
     ({ selectedRows, selectedCount, unselectedCount }: OnSelectionChangedParams<T>) => {
       selected.left = selectedRows;
-      dispatch.current?.({
+      dispatchRef.current?.({
         rAll: selectedCount === 0 && unselectedCount === 0,
         rSel: selectedCount === 0,
       });
@@ -235,7 +239,7 @@ export function Transfer<T = unknown>({
   const handleSelectionChangedRight = React.useCallback(
     ({ selectedRows, selectedCount, unselectedCount }: OnSelectionChangedParams<T>) => {
       selected.right = selectedRows;
-      dispatch.current?.({
+      dispatchRef.current?.({
         lSel: selectedCount === 0,
         lAll: selectedCount === 0 && unselectedCount === 0,
       });
@@ -253,7 +257,7 @@ export function Transfer<T = unknown>({
     selected.left = [];
 
     onTransfer?.(newLeft, newRight);
-    clearR.current?.();
+    clearRRef.current?.();
   }, [right, left, setLeft, setRight, selected, onTransfer]);
   const handleSelectedRight = React.useCallback(() => {
     const newLeft: T[] = not(left, selected.left);
@@ -266,7 +270,7 @@ export function Transfer<T = unknown>({
     selected.left = [];
 
     onTransfer?.(newLeft, newRight);
-    clearL.current?.();
+    clearLRef.current?.();
   }, [left, selected, right, setLeft, setRight, onTransfer]);
   const handleSelectedLeft = React.useCallback(() => {
     const newLeft: T[] = [...left, ...selected.right];
@@ -279,7 +283,7 @@ export function Transfer<T = unknown>({
     selected.right = [];
 
     onTransfer?.(newLeft, newRight);
-    clearR.current?.();
+    clearRRef.current?.();
   }, [left, selected, right, setLeft, setRight, onTransfer]);
   const handleAllLeft = React.useCallback(() => {
     const newLeft: T[] = [...left, ...right];
@@ -292,7 +296,7 @@ export function Transfer<T = unknown>({
     selected.right = [];
 
     onTransfer?.(newLeft, newRight);
-    clearL.current?.();
+    clearLRef.current?.();
   }, [left, right, setLeft, setRight, selected, onTransfer]);
 
   return (
@@ -315,7 +319,7 @@ export function Transfer<T = unknown>({
         <TransferButtons
           classes={classes?.buttons}
           styles={styles?.buttons}
-          dispatch={dispatch}
+          dispatch={dispatchRef}
           onRAllClick={handleAllRight}
           onRSelClick={handleSelectedRight}
           onLSelClick={handleSelectedLeft}

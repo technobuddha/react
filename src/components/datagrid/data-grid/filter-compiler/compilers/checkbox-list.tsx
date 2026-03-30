@@ -23,7 +23,7 @@ import { type CompilerOptions } from './options.ts';
  * @category DataGrid
  * @typeParam T - The data item type
  */
-// TODO [2025-12-31]: implement clear functionality
+// TODO [>0.1]: implement clear functionality
 export type CheckboxCompilerOptions<T = unknown> = CompilerOptions & {
   /** Filter type identifier */
   type: 'checkbox-list';
@@ -76,12 +76,12 @@ export function filterCompilerCheckbox<T = unknown>(
 
   return {
     name,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+    // eslint-disable-next-line @typescript-eslint/naming-convention, react/component-hook-factories
     Actuator({ classes, styles }: FilterActuatorProps2) {
       const { changeFilter, filterValues } = useGrid<T>();
-      const [open, setOpen] = React.useState<boolean>(false);
-      const [disabled, setDisabled] = React.useState<boolean>(true);
-      const filterValue = React.useRef(normalizeFilterArray(filterValues[name]));
+      const [open, setOpen] = React.useState(false);
+      const [disabled, setDisabled] = React.useState(true);
+      const filterValueRef = React.useRef(normalizeFilterArray(filterValues[name]));
 
       const handleActuatorClick = (): void => {
         setOpen(true);
@@ -94,12 +94,12 @@ export function filterCompilerCheckbox<T = unknown>(
         selectedCount,
         unselectedCount,
       }: OnSelectionChangedParams<string>): void => {
-        filterValue.current = unselectedCount === 0 ? null : selectedRows;
+        filterValueRef.current = unselectedCount === 0 ? null : selectedRows;
         setDisabled(selectedCount === 0);
       };
       const handleOKClick = (): void => {
         setOpen(false);
-        changeFilter(name, filterValue.current);
+        changeFilter(name, filterValueRef.current);
       };
       const handleCancelClick = (): void => {
         setOpen(false);
@@ -112,10 +112,8 @@ export function filterCompilerCheckbox<T = unknown>(
             styles={styles}
             Icon={Icon}
             title={title ?? (name as string)}
-            // eslint-disable-next-line react/jsx-no-bind
             onButtonClick={handleActuatorClick}
           />
-          {/*  eslint-disable-next-line react/jsx-no-bind */}
           <Dialog open={open} onClose={handleDialogClose} maxWidth={false}>
             <DialogTitle>{title ?? (name as string)}</DialogTitle>
             <DialogContent>
@@ -123,22 +121,19 @@ export function filterCompilerCheckbox<T = unknown>(
                 <DataGrid
                   data={search}
                   selection
-                  // eslint-disable-next-line react/jsx-no-bind
                   selected={(datum: string) =>
-                    filterValue.current === null || filterValue.current.includes(toString(datum))
+                    filterValueRef.current === null ||
+                    filterValueRef.current.includes(toString(datum))
                   }
                   columns={[{ name: name as string }]}
                   filters={[{ type: 'search', name: 0, title: title ?? (name as string) }]}
                   defaultSort="*"
-                  // eslint-disable-next-line react/jsx-no-bind
                   onSelectionChanged={handleSelectionChanged}
                 />
               </Box>
             </DialogContent>
             <DialogActions>
-              {/* eslint-disable-next-line react/jsx-no-bind */}
               <Button onClick={handleCancelClick}>Cancel</Button>
-              {/* eslint-disable-next-line react/jsx-no-bind */}
               <Button onClick={handleOKClick} disabled={disabled}>
                 OK
               </Button>

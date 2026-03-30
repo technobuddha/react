@@ -79,7 +79,7 @@ export function Sorter<T = unknown>({
   const { sort } = useGrid<T>();
 
   if (sort === undefined) {
-    //TODO [2026-03-01]: Better error recovery
+    //TODO [>0.1]: Better error recovery
   } else {
     const column = columns.find((col) => col.name === sort.sortBy);
 

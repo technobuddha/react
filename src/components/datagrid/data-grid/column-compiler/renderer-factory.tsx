@@ -1,13 +1,13 @@
 import React from 'react';
-import { toDate } from '@technobuddha/library';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { isNumber, toDate, toString } from '@technobuddha/library';
 import clsx from 'clsx';
-import { isNumber, toString } from '@technobuddha/library';
-import { Anything } from '../../anything';
 
-import type { Shape } from '../analyzer';
-import type { ColumnSpecification, ColumnType, ColumnRenderProps } from '../column';
+import { Anything } from '../../anything.tsx';
+
+import { type Shape } from '../analyzer.ts';
+import { type ColumnRenderProps, type ColumnSpecification, type ColumnType } from '../column.ts';
 
 const useCellStyles = makeStyles(() => ({
   cell: {
@@ -27,7 +27,9 @@ export function rendererFactory<T = unknown>(
   type: ColumnType,
   shape: Shape,
 ): ({ datum }: ColumnRenderProps<T>) => React.ReactElement {
-  if (column.render) return column.render;
+  if (column.render) {
+    return column.render;
+  }
 
   switch (shape) {
     case 'key-value': {
@@ -35,6 +37,8 @@ export function rendererFactory<T = unknown>(
 
       return ({ datum }: ColumnRenderProps<T>) => {
         const css = useCellStyles();
+        // TODO [>0.1]: any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const field = (datum as Record<string, any>)[key];
         return (
           <Anything className={css.cell} type={type.dataType}>
@@ -49,23 +53,27 @@ export function rendererFactory<T = unknown>(
 
       switch (type.dataType) {
         case 'number':
-        case 'boolean':
+        case 'boolean': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
             const field = (datum as unknown as unknown[])[key];
             return <Box className={clsx(css.cell, css.right)}>{toString(field)}</Box>;
           };
+        }
 
-        case 'date':
+        case 'date': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
             const field = (datum as unknown as unknown[])[key];
             return <Box className={clsx(css.cell, css.left)}>{toDate(field).toUTCString()}</Box>;
           };
+        }
 
-        case 'object':
+        case 'object': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
+            // TODO [>0.1]: any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const field = (datum as unknown as any[])[key];
             return (
               <Box className={clsx(css.cell, css.left)}>
@@ -73,10 +81,13 @@ export function rendererFactory<T = unknown>(
               </Box>
             );
           };
+        }
 
-        case 'array':
+        case 'array': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
+            // TODO [>0.1]: any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const field = (datum as unknown as any[])[key] as unknown[];
             return (
               <Box className={clsx(css.cell, css.left)}>
@@ -84,15 +95,17 @@ export function rendererFactory<T = unknown>(
               </Box>
             );
           };
+        }
 
         case 'unknown':
         case 'string':
-        default:
+        default: {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
             const field = (datum as unknown as unknown[])[key];
             return <Box className={clsx(css.cell, css.left)}>{toString(field)}</Box>;
           };
+        }
       }
     }
 
@@ -100,19 +113,21 @@ export function rendererFactory<T = unknown>(
     case 'polymorphic': {
       switch (type.dataType) {
         case 'number':
-        case 'boolean':
+        case 'boolean': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
             return <Box className={clsx(css.cell, css.right)}>{toString(datum)}</Box>;
           };
+        }
 
-        case 'date':
+        case 'date': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
             return <Box className={clsx(css.cell, css.left)}>{toDate(datum).toUTCString()}</Box>;
           };
+        }
 
-        case 'object':
+        case 'object': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
             return (
@@ -121,26 +136,30 @@ export function rendererFactory<T = unknown>(
               </Box>
             );
           };
+        }
 
-        case 'array':
-          // eslint-disable-next-line react/jsx-no-useless-fragment
+        case 'array': {
+          // eslint-disable-next-line react/no-useless-fragment
           return () => <></>;
+        }
 
         case 'unknown':
         case 'string':
-        default:
+        default: {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
             return <Box className={clsx(css.cell, css.left)}>{toString(datum)}</Box>;
           };
+        }
       }
     }
 
-    default:
+    default: {
       return ({ datum }: ColumnRenderProps<T>) => {
         const css = useCellStyles();
         return <Box className={clsx(css.cell, css.left)}>{toString(datum)}</Box>;
       };
+    }
   }
 }
 

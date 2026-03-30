@@ -27,7 +27,7 @@ import { isFunction } from '@technobuddha/library';
  * @category UseLocal
  */
 export function useLocal<T>(initialState: T | (() => T)): [T, (set: T | ((prev: T) => T)) => void] {
-  const localRef = React.useRef<T>(isFunction(initialState) ? initialState() : initialState);
+  const localRef = React.useRef(isFunction(initialState) ? initialState() : initialState);
   const setter = React.useMemo(
     () => (set: T | ((prev: T) => T)) => {
       localRef.current = isFunction(set) ? set(localRef.current) : set;

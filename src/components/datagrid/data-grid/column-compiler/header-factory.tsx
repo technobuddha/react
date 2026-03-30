@@ -1,13 +1,13 @@
 import React from 'react';
+import { Box, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Button, Box } from '@mui/material';
-import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
-import clsx from 'clsx';
 import { isString } from '@technobuddha/library';
-import { useGrid } from '../grid-context';
+import clsx from 'clsx';
+import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
 
-import type { Shape } from '../analyzer';
-import type { ColumnSpecification, ColumnType, ColumnHeaderProps } from '../column';
+import { type Shape } from '../analyzer.ts';
+import { type ColumnHeaderProps, type ColumnSpecification, type ColumnType } from '../column.ts';
+import { useGrid } from '../grid-context.tsx';
 
 /**
  * Material-UI styles for column headers.
@@ -87,8 +87,8 @@ export function headerFactory<T = unknown>(
         <Button
           className={clsx(css.button, classes?.button)}
           style={styles?.button}
-          fullWidth={true}
-          disableElevation={true}
+          fullWidth
+          disableElevation
           size="small"
           variant="contained"
           onClick={

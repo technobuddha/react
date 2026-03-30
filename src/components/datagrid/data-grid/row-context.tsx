@@ -79,7 +79,7 @@ const RowContext = React.createContext<RowState<any>>(null!);
  * @category DataGrid
  */
 export function useRow<T = unknown>(): RowState<T> {
-  return React.useContext(RowContext) as RowState<T>;
+  return React.use(RowContext) as RowState<T>;
 }
 
 /**
@@ -159,7 +159,7 @@ export function RowProvider<T = unknown>({
   children,
 }: RowProviderProps<T>): React.ReactElement {
   const { data } = useGrid<T>();
-  // eslint-disable-next-line react/hook-use-state
+  // eslint-disable-next-line react/use-state
   const [, setUpdate] = React.useState(0);
 
   const state = React.useMemo(() => {
@@ -205,7 +205,7 @@ export function RowProvider<T = unknown>({
           }
         }
       } else {
-        // TODO [2025-12-31]: better error recovery
+        // TODO [>0.1]: better error recovery
       }
     },
     [state],
@@ -237,7 +237,7 @@ export function RowProvider<T = unknown>({
             cntUnselected++;
           }
         } else {
-          // TODO [2025-12-31]: Better error recovery
+          // TODO [>0.1]: Better error recovery
         }
       }
 
@@ -252,7 +252,7 @@ export function RowProvider<T = unknown>({
       selectedCount: state.selectedCount,
       unselectedCount: state.unselectedCount,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
   }, [state, state.selectedCount, state.unselectedCount]);
 
   const value = React.useMemo(
@@ -266,5 +266,5 @@ export function RowProvider<T = unknown>({
     [countSelected, getSelected, setSelected, state.selectedCount, state.unselectedCount],
   );
 
-  return <RowContext.Provider value={value}>{children}</RowContext.Provider>;
+  return <RowContext value={value}>{children}</RowContext>;
 }

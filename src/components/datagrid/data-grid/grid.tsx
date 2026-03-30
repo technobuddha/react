@@ -1,5 +1,5 @@
-/* eslint-disable react/no-multi-comp */
-/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react/no-nested-component-definitions */
+/* eslint-disable react/component-hook-factories */
 import React from 'react';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -207,16 +207,16 @@ export function Grid<T = unknown>({
   const css = useGridStyles();
 
   const GridRow = (rowProps: ListChildComponentProps): React.ReactElement => {
-    // eslint-disable-next-line react/destructuring-assignment
+    // eslint-disable-next-line react/prefer-destructuring-assignment
     const datum = data[rowProps.index];
 
     return (
       <Row
         classes={classes?.row}
         styles={styles?.row}
-        // eslint-disable-next-line react/destructuring-assignment
+        // eslint-disable-next-line react/prefer-destructuring-assignment
         style={rowProps.style}
-        // eslint-disable-next-line react/destructuring-assignment
+        // eslint-disable-next-line react/prefer-destructuring-assignment
         index={rowProps.index}
         datum={datum}
         columns={columns}
@@ -286,7 +286,7 @@ export function Grid<T = unknown>({
                 itemSize={rowHeight}
                 layout="vertical"
               >
-                {/* TODO [2025-11-30]: any */}
+                {/* TODO [>0.1]: any */}
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {GridRow as any}
               </FixedSizeList>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Chip } from '@mui/material';
-import useGrid from '../grid-context';
-import { normalizeFilterArray } from './compilers/normalization';
 
-import type { FilterIndicatorProps } from '../filter';
+import { type FilterIndicatorProps } from '../filter/index.ts';
+import useGrid from '../grid-context.tsx';
+
+import { normalizeFilterArray } from './compilers/normalization.ts';
 
 /**
  * Arguments for creating a filter indicator.
@@ -18,6 +19,7 @@ export type IndicatorArgs<T = unknown> = {
   /** Optional display title for the indicator */
   title?: string;
   /** Optional icon component to display in the indicator chip */
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   Icon?: React.ComponentType<{
     /** Optional CSS class name for the icon element */
     className?: string;
@@ -59,6 +61,7 @@ export type IndicatorArgs<T = unknown> = {
  * @category DataGrid
  */
 export function arrayIndicator<T = unknown>({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   Icon,
   name,
   title,
@@ -73,12 +76,14 @@ export function arrayIndicator<T = unknown>({
       for (let i = filterValue.length; i > 0; --i) {
         str = filterValue.slice(0, i).join(', ');
         if (str.length < 40 || i === 1) {
-          if (filterValue.length > i) str += `, +${filterValue.length - i}…`;
+          if (filterValue.length > i) {
+            str += `, +${filterValue.length - i}…`;
+          }
           break;
         }
       }
 
-      const handleFilterDelete = () => {
+      const handleFilterDelete = (): void => {
         changeFilter(name, null);
       };
 
@@ -94,7 +99,7 @@ export function arrayIndicator<T = unknown>({
       );
     }
 
-    // eslint-disable-next-line react/jsx-no-useless-fragment
+    // eslint-disable-next-line react/no-useless-fragment
     return <></>;
   };
 }

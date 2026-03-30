@@ -69,7 +69,7 @@ const GridContext = React.createContext<GridState>(null!);
  * @category DataGrid
  */
 export function useGrid<T = unknown>(): GridState<T> {
-  return React.useContext(GridContext) as GridState<T>;
+  return React.use(GridContext) as GridState<T>;
 }
 
 /**
@@ -151,13 +151,13 @@ export function GridProvider<T = unknown>({
         setSortInQueryString(newSort);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
     [sortCode],
   );
 
   const baseFilterValues = React.useCallback(
     () => (useLocation ? getFiltersFromQueryString() : {}),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
     [],
   );
   const [filterValues, setFilterValues] = React.useState<FilterValues>(baseFilterValues);
@@ -169,14 +169,14 @@ export function GridProvider<T = unknown>({
         setFiltersInQueryString(newFilterValues);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
     [filterValues],
   );
 
   const handlePopState = React.useCallback(() => {
     setSortCode(baseSort());
     setFilterValues(baseFilterValues());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -188,14 +188,14 @@ export function GridProvider<T = unknown>({
         globalThis.removeEventListener('popstate', handlePopState);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react/exhaustive-deps
   }, [useLocation]);
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <GridContext.Provider value={{ data, sort: sortCode, changeSort, filterValues, changeFilter }}>
+    // eslint-disable-next-line react/no-unstable-context-value
+    <GridContext value={{ data, sort: sortCode, changeSort, filterValues, changeFilter }}>
       {children}
-    </GridContext.Provider>
+    </GridContext>
   );
 }
 

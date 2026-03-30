@@ -60,39 +60,39 @@ export const SizeScrollbar: React.FC<SizeScrollbarProps> = ({
   style,
   children,
 }) => {
-  const [state, setState] = React.useState<ElementSize & ScrollbarSize>({
+  const [state, setState] = React.useState({
     width: 0,
     height: 0,
     scrollbarWidth: 0,
     scrollbarHeight: 0,
   });
-  const div = React.useRef<HTMLDivElement>(null);
+  const divRef = React.useRef<HTMLDivElement>(null);
   const observer = React.useMemo(
     () =>
       new ResizeObserver(() => {
-        if (div.current) {
-          setState({ ...measure(div.current), ...scrollbarSize() });
+        if (divRef.current) {
+          setState({ ...measure(divRef.current), ...scrollbarSize() });
         }
       }),
     [],
   );
 
   React.useEffect(() => {
-    if (div.current) {
-      observer.observe(div.current);
+    if (divRef.current) {
+      observer.observe(divRef.current);
     }
     observer.observe(document.body);
 
     return () => {
       observer.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [div.current]);
+    // eslint-disable-next-line react/exhaustive-deps, react/refs
+  }, [divRef.current]);
 
   const Children = children;
 
   return (
-    <div style={{ ...style, width, height }} ref={div}>
+    <div style={{ ...style, width, height }} ref={divRef}>
       {state.width === 0 || state.height === 0 ?
         '\u00A0'
       : <Children

@@ -82,11 +82,11 @@ export function filterCompilerSearch<T = unknown>(
 ): Filter<T> {
   return {
     name,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+    // eslint-disable-next-line @typescript-eslint/naming-convention, react/component-hook-factories
     Actuator: () => {
       const css = useSearchStyles();
       const { changeFilter, filterValues } = useGrid<T>();
-      const [search, setSearch] = React.useState(normalizeFilterValue(filterValues[name]));
+      const [search, setSearch] = React.useState(() => normalizeFilterValue(filterValues[name]));
       // const timer = React.useRef<number | undefined>(undefined);
 
       // const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

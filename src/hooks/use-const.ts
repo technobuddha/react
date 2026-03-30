@@ -18,7 +18,7 @@ import { isFunction } from '@technobuddha/library';
  * @category UseConst
  */
 export function useConst<T>(initialValue: T | (() => T)): T {
-  const value = React.useRef<T>(isFunction(initialValue) ? initialValue() : initialValue);
+  const value = React.useRef(isFunction(initialValue) ? initialValue() : initialValue);
 
   return value.current;
 }

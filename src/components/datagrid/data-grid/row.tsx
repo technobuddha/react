@@ -210,7 +210,6 @@ export function Row<T = unknown>({
           <IconButton
             className={clsx(css.menuButton, classes?.menuButton)}
             style={styles?.menuButton}
-            // eslint-disable-next-line react/jsx-no-bind
             onClick={handleMenuClick}
             size="small"
           >

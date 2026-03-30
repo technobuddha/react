@@ -135,7 +135,6 @@ const TransferButtons: React.FC<TransferButtonsProps> = ({
   const handleLSelClick = React.useCallback(() => onLSelClick?.(), [onLSelClick]);
   const handleLAllClick = React.useCallback(() => onLAllClick?.(), [onLAllClick]);
 
-  // eslint-disable-next-line react-hooks/immutability
   dispatch.current = ({ rAll, rSel, lAll, lSel }: Parameters<DispatchFunction>[0]) => {
     if (rAll !== undefined) {
       setRAllDisabled(rAll);

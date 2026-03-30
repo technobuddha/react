@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { isString } from '@technobuddha/library';

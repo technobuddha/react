@@ -74,7 +74,7 @@ function not<T>(a: T[], b: T[]): T[] {
  * @category DataGrid
  * @typeParam T - The data item type
  */
-// TODO [2025-12-31]: implement the clear functionality
+// TODO [>0.1]: implement the clear functionality
 export function filterCompilerTransfer<T = unknown>(
   // eslint-disable-next-line @typescript-eslint/naming-convention
   { name, title, Icon }: TransferCompilerOptions<T>,
@@ -82,16 +82,16 @@ export function filterCompilerTransfer<T = unknown>(
 ): Filter<T> {
   return {
     name,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+    // eslint-disable-next-line @typescript-eslint/naming-convention, react/component-hook-factories
     Actuator({ classes, styles }: FilterActuatorProps2) {
       const { data, changeFilter, filterValues } = useGrid<T>();
-      const [open, setOpen] = React.useState<boolean>(false);
+      const [open, setOpen] = React.useState(false);
       const filterValue = React.useMemo(
         () => normalizeFilterArray(filterValues[name]) ?? [],
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react/exhaustive-deps
         [filterValues, name],
       );
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react/exhaustive-deps
       const search = React.useMemo(() => getUniqueValues(data, name), [data, name]);
       const left = React.useMemo(() => not(search, filterValue), [search, filterValue]);
       const right = React.useMemo(() => filterValue, [filterValue]);
@@ -121,10 +121,8 @@ export function filterCompilerTransfer<T = unknown>(
             styles={styles}
             Icon={Icon}
             title={title ?? (name as string)}
-            // eslint-disable-next-line react/jsx-no-bind
             onButtonClick={handleActuatorClick}
           />
-          {/* eslint-disable-next-line react/jsx-no-bind */}
           <Dialog open={open} onClose={handleDialogClose} maxWidth={false}>
             <DialogTitle>{title ?? (name as string)}</DialogTitle>
             <DialogContent>
@@ -134,14 +132,11 @@ export function filterCompilerTransfer<T = unknown>(
                 rowHeight={24}
                 left={left}
                 right={right}
-                // eslint-disable-next-line react/jsx-no-bind
                 onTransfer={handleTransfer}
               />
             </DialogContent>
             <DialogActions>
-              {/* eslint-disable-next-line react/jsx-no-bind */}
               <Button onClick={handleCancelClick}>Cancel</Button>
-              {/* eslint-disable-next-line react/jsx-no-bind */}
               <Button onClick={handleOKClick}>OK</Button>
             </DialogActions>
           </Dialog>

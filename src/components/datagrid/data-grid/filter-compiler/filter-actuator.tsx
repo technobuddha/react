@@ -93,7 +93,6 @@ export const FilterActuator: React.FC<FilterActuatorProps> = ({
       <Button
         className={clsx(css.button, classes?.button)}
         style={styles?.button}
-        // eslint-disable-next-line react/jsx-no-bind
         onClick={handleButtonClick}
       >
         {Icon != null && <Icon className={clsx(css.icon, classes?.icon)} style={styles?.icon} />}
