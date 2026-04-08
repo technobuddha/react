@@ -3,18 +3,17 @@
 // 🚨
 // @ts-check
 import { lint } from '@technobuddha/project';
-import { defineConfig } from 'eslint/config';
 
-export default defineConfig([
-  lint({
+export default lint(
+  {
     files: ['**/*.ts'],
     ignores: ['@types/**/*', 'components/datagrid/@types/**/*'],
     typescript: true,
-  }),
-  lint({
+  },
+  {
     files: ['**/*.tsx'],
     ignores: ['@types/**/*', 'components/datagrid/@types/**/*'],
     typescript: true,
     react: true,
-  }),
-]);
+  },
+);
