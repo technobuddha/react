@@ -1,11 +1,12 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@technobuddha/react",
   "description": "Technobuddha React Library",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "license": "MIT",
   "type": "module",
-  "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "main": "dist/index.js",
   "author": {
     "name": "Phil Hill",
     "email": "phil@technobuddha.com"
@@ -14,10 +15,10 @@
     "type": "git",
     "url": "https://github.com/technobuddha/react"
   },
+  "homepage": "https://github.com/technobuddha/react#readme",
   "bugs": {
     "url": "https://github.com/technobuddha/react/issues"
   },
-  "homepage": "https://github.com/technobuddha/react#readme",
   "scripts": {
     "build": "build default",
     "publish": "build publish",
@@ -32,19 +33,16 @@
   "dependencies": {
     "@technobuddha/library": "2.1.0-102",
     "clsx": "2.1.1",
-    "jest-extended": "7.0.0",
-    "jest-matcher-deep-close-to": "3.0.2",
     "query-string": "9.3.1",
-    "react-window": "1.8.11",
-    "vite": "8.0.3"
+    "react-window": "1.8.11"
   },
   "devDependencies": {
-    "@mui/material": "7.3.9",
-    "@mui/styles": "6.5.0",
-    "@technobuddha/project": "0.1.0-507",
+    "@mui/material": "7.3.10",
+    "@mui/styles": "6.4.8",
+    "@technobuddha/project": "0.1.0-512",
     "@types/react": "19.2.14",
     "@types/react-window": "1.8.8",
-    "react": "19.2.4",
+    "react": "19.2.5",
     "react-icons": "5.6.0"
   },
   "peerDependencies": {
