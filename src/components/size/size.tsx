@@ -1,5 +1,5 @@
 import React from 'react';
-import { type ElementSize, measure } from '@technobuddha/library/browser';
+import { type ElementSize, measure } from '@technobuddha/library';
 
 /**
  * Props passed to the render function of the Size component.

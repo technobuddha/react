@@ -4,7 +4,7 @@ import {
   measure,
   type ScrollbarSize,
   scrollbarSize,
-} from '@technobuddha/library/browser';
+} from '@technobuddha/library';
 
 /**
  * Render props containing element dimensions and scrollbar measurements
