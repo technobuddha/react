@@ -1,52 +1,30 @@
-/** @type {import('@technobuddha/builder').Builds} */
+/** @type {import('@technobuddha/project/build').Builds} */
 const config = {
-  dev: {
-    watch: true,
+  default: {
     steps: [
       {
         name: 'Clean',
-        command: 'rm -rf ./dist'
+        command: 'rm -rf ./dist',
       },
       {
         name: 'React',
-        directory: './src',
-        command: 'tsc --build src',
-        daemon: true,
+        command: 'npx tsc --build src',
       },
     ],
   },
-  prod: {
-    steps: [
-      {
-        name: 'Clean',
-        command: 'rm -rf ./dist',
-      },
-      {
-        name: 'React',
-        command: 'tsc --build src',
-      },
-    ]
-  },
   publish: {
     steps: [
-      {
-        name: 'Clean',
-        command: 'rm -rf ./dist',
-      },
-      {
-        name: 'React',
-        command: 'tsc --build src',
-      },
+      { build: 'default' },
       {
         name: 'Version',
-        command: 'yarn version patch',
+        command: 'yarn version prerelease',
       },
       {
         name: 'Publish',
-        command: 'yarn npm publish --access public',
-      }
-    ]
-  }
+        command: 'yarn npm publish --access=public',
+      },
+    ],
+  },
 };
 
 export default config;

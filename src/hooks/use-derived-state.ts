@@ -25,8 +25,8 @@ import { changed, isFunction } from '@technobuddha/library';
  *   );
  * }
  * ```
- * @group React
- * @category Hooks
+ * @group Hooks
+ * @category UseDerivedState
  */
 export function useDerivedState<T>(
   initialValue: T | ((prevValue: T) => T),

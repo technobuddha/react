@@ -1,6 +1,5 @@
 import React from 'react';
-import { isFunction } from '@technobuddha/library';
-import { type JsonValue } from 'type-fest';
+import { isFunction, type JSONValue } from '@technobuddha/library';
 
 /**
  * Similar to `React.useState`, returns a stateful value and a function to update it. The state
@@ -29,10 +28,10 @@ import { type JsonValue } from 'type-fest';
  *   );
  * }
  * ```
- * @group React
- * @category Hooks
+ * @group Hooks
+ * @category UseLocalStorage
  */
-export function useLocalStorage<T extends JsonValue>(
+export function useLocalStorage<T extends JSONValue>(
   key: string,
   initialState: T | (() => T),
 ): readonly [T, (newValue: T | ((oldValue: T) => T)) => void] {

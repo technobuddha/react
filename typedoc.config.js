@@ -1,23 +1,40 @@
+// 🚨
+// 🚨 CHANGES TO THIS FILE WILL BE OVERRIDDEN
+// 🚨
 //@ts-check
-/** @type {import('typedoc').TypeDocOptions} */
+
+/** @type import('typedoc').TypeDocOptions */
 const config = {
   // Configuration
-  name: 'react-hooks',
-  tsconfig: 'src/tsconfig.code.json',
+  name: 'react',
+  tsconfig: 'src/tsconfig.typedoc.json',
+  plugin: ['@technobuddha/project/plugin-typedoc'],
   // Input
-  entryPoints: ['src/index.ts'],
   entryPointStrategy: 'resolve',
+  entryPoints: ['src/index.ts'],
   excludeInternal: true,
   excludePrivate: true,
   excludeProtected: true,
   gitRevision: 'main',
   readme: 'none',
-  //  Output
   basePath: '.',
-  //  Organization
+  // Output
+  emit: 'none',
+  navigation: {
+    includeCategories: true,
+    includeGroups: true,
+    includeFolders: false,
+    compactFolders: true,
+    excludeReferences: true,
+  },
+  // Organization
   categorizeByGroup: true,
-  defaultCategory: 'Uncategorized',
-  categoryOrder: ['Uncategorized', '*'],
+  // Validation
+  validation: {
+    notDocumented: true,
+  },
+  // Other
+  logLevel: 'Warn',
 };
 
 export default config;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { type ElementSize, measureWindow } from '@technobuddha/library';
-import { throttle } from '@technobuddha/library';
+import { type ElementSize, measureWindow, throttle } from '@technobuddha/library';
 
 /**
  * Gets the current window size, including the dimensions of the scroll bars.
@@ -8,10 +7,13 @@ import { throttle } from '@technobuddha/library';
  * Also returns a `count` property, which increments each time the window is resized (since mount).
  *
  * @returns width, height, scrollbarWidth, scrollbarHeight, count
- * @group React
- * @category Hooks
+ * @group Hooks
+ * @category UseWindowSize
  */
-export function useWindowSize(): ElementSize & { count: number } {
+export function useWindowSize(): ElementSize & {
+  /** Number of times the window has been resized since component mount */
+  count: number;
+} {
   const isClient = globalThis.window !== undefined;
   const [count, setCount] = React.useState(0);
   const [size, setSize] = React.useState(() =>

@@ -3,9 +3,14 @@
 const config = {
   directories: {
     src: {
-      environment: 'vite-client',
+      platform: 'vite-client',
     },
   },
+  lint: {
+    rules: {
+      'no-bitwise': { rule: 'off' },
+    }
+  }
 };
 
 export default config;

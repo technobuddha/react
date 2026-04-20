@@ -15,8 +15,8 @@ import React from 'react';
  *   return <div>{props.value}</div>;
  * }
  * ```
- * @group React
- * @category Hooks
+ * @group Hooks
+ * @category UseWhyDidIRender
  */
 export function useWhyDidIRender(name: string, props: Record<string, unknown>): void {
   const previousProps = React.useRef<Record<string, unknown> | undefined>(undefined);

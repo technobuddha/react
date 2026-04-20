@@ -9,6 +9,8 @@ import { memoize, type Memoized } from '@technobuddha/library';
  * @param callback - A function that takes a key and returns a function to be memoized.
  * @param dependencies - An array of dependencies that determine when to recompute the memoized callback.
  * @returns A memoized function that caches results based on the key.
+ * @group Hooks
+ * @category UseMemoizedCallback
  */
 export function useMemoizedCallback<Key, Return extends Function>(
   callback: (key: Key) => Return,
