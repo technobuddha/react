@@ -74,7 +74,7 @@ function not<T>(a: T[], b: T[]): T[] {
  * @category DataGrid
  * @typeParam T - The data item type
  */
-// TODO [>0.1]: implement the clear functionality
+// TODO [>1]: implement the clear functionality
 export function filterCompilerTransfer<T = unknown>(
   // eslint-disable-next-line @typescript-eslint/naming-convention
   { name, title, Icon }: TransferCompilerOptions<T>,
@@ -82,7 +82,7 @@ export function filterCompilerTransfer<T = unknown>(
 ): Filter<T> {
   return {
     name,
-    // eslint-disable-next-line @typescript-eslint/naming-convention, react/component-hook-factories
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     Actuator({ classes, styles }: FilterActuatorProps2) {
       const { data, changeFilter, filterValues } = useGrid<T>();
       const [open, setOpen] = React.useState(false);

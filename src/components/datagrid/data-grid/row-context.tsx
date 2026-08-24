@@ -197,15 +197,14 @@ export function RowProvider<T = unknown>({
           if (isSelected) {
             state.selectedCount++;
             state.unselectedCount--;
-            setUpdate((x) => x + 1);
           } else {
             state.selectedCount--;
             state.unselectedCount++;
-            setUpdate((x) => x + 1);
           }
+          setUpdate((x) => x + 1);
         }
       } else {
-        // TODO [>0.1]: better error recovery
+        // TODO [>1]: better error recovery
       }
     },
     [state],
@@ -237,7 +236,7 @@ export function RowProvider<T = unknown>({
             cntUnselected++;
           }
         } else {
-          // TODO [>0.1]: Better error recovery
+          // TODO [>1]: Better error recovery
         }
       }
 

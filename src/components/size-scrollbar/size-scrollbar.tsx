@@ -94,7 +94,7 @@ export const SizeScrollbar: React.FC<SizeScrollbarProps> = ({
   return (
     <div style={{ ...style, width, height }} ref={divRef}>
       {state.width === 0 || state.height === 0 ?
-        '\u00A0'
+        '\u{A0}'
       : <Children
           width={state.width}
           height={state.height}

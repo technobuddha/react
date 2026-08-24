@@ -96,7 +96,8 @@ export function getSortFromQueryString(): SortKey | undefined {
 
   if (!sort) {
     return undefined;
-  } else if (Array.isArray(sort)) {
+  }
+  if (Array.isArray(sort)) {
     return decodeSort(sort[0]);
   }
 

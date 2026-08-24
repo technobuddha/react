@@ -127,7 +127,8 @@ function queryStringizeFilterValue<T = unknown>(filterValues: FilterValues<T>): 
       Object.entries(filterValues).map(([k, v]) => {
         if (v === null) {
           return [k, null];
-        } else if (Array.isArray(v)) {
+        }
+        if (Array.isArray(v)) {
           return [k, v.join('&')];
         }
 

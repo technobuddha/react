@@ -5,7 +5,6 @@ import clsx from 'clsx';
 
 import { useDerivedState } from '../../../hooks/use-derived-state.ts';
 
-import { type ColumnSpecification } from '../data-grid/column.ts';
 import {
   type DataGridClasses,
   type DataGridStyles,
@@ -14,12 +13,12 @@ import {
 import { DataGrid } from '../data-grid/data-grid.tsx';
 import { type FilterSpecification } from '../data-grid/filter-compiler/filter-compiler.ts';
 
+import TransferButtons from './transfer-buttons.tsx';
 import {
   type DispatchFunction,
   type TransferButtonClasses,
   type TransferButtonStyles,
 } from './transfer-buttons.tsx';
-import TransferButtons from './transfer-buttons.tsx';
 
 /**
  * Returns elements in array a that are not in array b.
@@ -205,7 +204,7 @@ export function Transfer<T = unknown>({
     // eslint-disable-next-line react/exhaustive-deps
     [leftProp, rightProp],
   );
-  const columns = React.useMemo(() => [{ name } as ColumnSpecification<T>], [name]);
+  const columns = React.useMemo(() => [{ name }], [name]);
   const clearRRef = React.useRef<() => void>(null);
   const clearLRef = React.useRef<() => void>(null);
   const filtersR = React.useMemo(

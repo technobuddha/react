@@ -79,7 +79,7 @@ export function Sorter<T = unknown>({
   const { sort } = useGrid<T>();
 
   if (sort === undefined) {
-    //TODO [>0.1]: Better error recovery
+    //TODO [>1]: Better error recovery
   } else {
     const column = columns.find((col) => col.name === sort.sortBy);
 
@@ -87,9 +87,7 @@ export function Sorter<T = unknown>({
       const collators = cull(
         // eslint-disable-next-line @typescript-eslint/unbound-method
         column.sortBy.map((s) => columns.find((col) => col.name === s)?.collate),
-      )
-        .map((collate) => collate(sort.sortAscending))
-        .toArray();
+      ).map((collate) => collate!(sort.sortAscending));
       if (collators.length > 0) {
         data.sort((x: T, y: T) => {
           let result = 0;

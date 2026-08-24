@@ -4,4 +4,4 @@
 // @ts-check
 import { lint } from '@technobuddha/project';
 
-export default lint({ files: ['*.js'], platform: 'node' }, { files: ['*.md'], markdown: true });
+export default lint({ files: ['*.ts'], platform: 'node', typescript: true });

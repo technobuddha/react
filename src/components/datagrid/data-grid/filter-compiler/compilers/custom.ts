@@ -56,6 +56,5 @@ export function filterCompilerCustom<T = unknown>(
   options: CustomCompilerOptions<T>,
   data: T[],
 ): Filter<T> {
-  // eslint-disable-next-line unicorn/no-array-method-this-argument
   return options.filter(data, options.clear);
 }

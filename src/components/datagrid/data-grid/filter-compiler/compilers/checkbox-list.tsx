@@ -23,7 +23,7 @@ import { type CompilerOptions } from './options.ts';
  * @category DataGrid
  * @typeParam T - The data item type
  */
-// TODO [>0.1]: implement clear functionality
+// TODO [>1]: implement clear functionality
 export type CheckboxCompilerOptions<T = unknown> = CompilerOptions & {
   /** Filter type identifier */
   type: 'checkbox-list';
@@ -76,7 +76,7 @@ export function filterCompilerCheckbox<T = unknown>(
 
   return {
     name,
-    // eslint-disable-next-line @typescript-eslint/naming-convention, react/component-hook-factories
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     Actuator({ classes, styles }: FilterActuatorProps2) {
       const { changeFilter, filterValues } = useGrid<T>();
       const [open, setOpen] = React.useState(false);

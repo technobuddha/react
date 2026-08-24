@@ -150,7 +150,7 @@ export function RowHeader<T = unknown>({
         className={clsx(css.cell, css.stub, classes?.cell, css.cellHeader, classes?.cellHeader)}
         style={{ ...styles?.cell, ...styles?.stub, ...styles?.cellHeader }}
       >
-        {'\u00A0'}
+        {'\u{A0}'}
       </Box>
     </Box>
   );

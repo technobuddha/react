@@ -170,7 +170,8 @@ export const Anything: React.FC<AnythingParams> = ({
         ))}
       </div>
     );
-  } else if (isNonDateObject(children)) {
+  }
+  if (isNonDateObject(children)) {
     return (
       <div className={clsx(css.object, className, top && css.top)}>
         {Object.entries(children).map(([key, value]) => (

@@ -55,7 +55,7 @@ export function columnCompiler<T = unknown>(
           render: rendererFactory(column, type, shape),
           sortBy: column.sortBy === null ? null : (column.sortBy ?? [column.name]),
           collate: collatorFactory(column, type, shape),
-        } as Column<T>;
+        };
       })
     : getKeys().map((key) => createDefaultColumn(key));
 

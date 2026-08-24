@@ -99,7 +99,6 @@ export function arrayIndicator<T = unknown>({
       );
     }
 
-    // eslint-disable-next-line react/no-useless-fragment
     return <></>;
   };
 }

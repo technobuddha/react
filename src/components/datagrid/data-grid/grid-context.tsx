@@ -181,11 +181,13 @@ export function GridProvider<T = unknown>({
 
   React.useEffect(() => {
     if (useLocation) {
-      globalThis.addEventListener('popstate', handlePopState);
+      // eslint-disable-next-line unicorn/prefer-global-this
+      window.addEventListener('popstate', handlePopState);
     }
     return () => {
       if (useLocation) {
-        globalThis.removeEventListener('popstate', handlePopState);
+        // eslint-disable-next-line unicorn/prefer-global-this
+        window.removeEventListener('popstate', handlePopState);
       }
     };
     // eslint-disable-next-line react/exhaustive-deps

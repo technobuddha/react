@@ -99,7 +99,7 @@ export const Size: React.FC<SizeProps> = ({ width = '100%', height = '100%', sty
   return (
     <div style={{ ...style, width, height }} ref={divRef}>
       {state.width === 0 || state.height === 0 ?
-        '\u00A0'
+        '\u{A0}'
       : children({ width: state.width, height: state.height })}
     </div>
   );

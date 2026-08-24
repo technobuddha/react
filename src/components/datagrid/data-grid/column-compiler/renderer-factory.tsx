@@ -37,7 +37,7 @@ export function rendererFactory<T = unknown>(
 
       return ({ datum }: ColumnRenderProps<T>) => {
         const css = useCellStyles();
-        // TODO [>0.1]: any
+        // TODO [>1]: any
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const field = (datum as Record<string, any>)[key];
         return (
@@ -49,7 +49,7 @@ export function rendererFactory<T = unknown>(
     }
 
     case 'array': {
-      const key = isNumber(column.name) ? column.name : Number.parseFloat(column.name);
+      const key = isNumber(column.name) ? column.name : Number(column.name);
 
       switch (type.dataType) {
         case 'number':
@@ -72,7 +72,7 @@ export function rendererFactory<T = unknown>(
         case 'object': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
-            // TODO [>0.1]: any
+            // TODO [>1]: any
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const field = (datum as unknown as any[])[key];
             return (
@@ -86,7 +86,7 @@ export function rendererFactory<T = unknown>(
         case 'array': {
           return ({ datum }: ColumnRenderProps<T>) => {
             const css = useCellStyles();
-            // TODO [>0.1]: any
+            // TODO [>1]: any
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const field = (datum as unknown as any[])[key] as unknown[];
             return (
@@ -139,7 +139,6 @@ export function rendererFactory<T = unknown>(
         }
 
         case 'array': {
-          // eslint-disable-next-line react/no-useless-fragment
           return () => <></>;
         }
 

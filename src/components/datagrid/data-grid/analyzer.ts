@@ -211,8 +211,9 @@ function analyze<T = unknown>({
 
   for (const datum of data.slice(0, 1000)) {
     if (isObject(datum) && !isDate(datum)) {
+      // eslint-disable-next-line unicorn/prefer-object-iterable-methods
       for (const key of Object.keys(datum)) {
-        if (!(key in columnData)) {
+        if (!Object.hasOwn(columnData, key)) {
           columnData[key] = new Set<IdentifiedType>();
         }
 
@@ -224,7 +225,7 @@ function analyze<T = unknown>({
       for (const [i, element] of datum.entries()) {
         const key = i.toString();
 
-        if (!(key in columnData)) {
+        if (!Object.hasOwn(columnData, key)) {
           columnData[key] = new Set<IdentifiedType>();
         }
 
@@ -236,8 +237,8 @@ function analyze<T = unknown>({
       const type = identify(datum);
 
       if (used.size > 0) {
-        for (const key of used.keys()) {
-          if (!(key in columnData)) {
+        for (const key of used) {
+          if (!Object.hasOwn(columnData, key)) {
             columnData[key] = new Set<IdentifiedType>();
           }
 
@@ -256,7 +257,7 @@ function analyze<T = unknown>({
   }
 
   for (const [key, identified] of Object.entries(columnData)) {
-    if (!(key in types)) {
+    if (!Object.hasOwn(types, key)) {
       let nullable = false;
 
       if (identified.has('null') || identified.has('undefined')) {
@@ -320,7 +321,8 @@ function identify(value: unknown, identifyArrays = true): IdentifiedType {
     case 'string': {
       if (isoDate.test(value as string)) {
         return 'iso-date';
-      } else if (numeric.test(value as string)) {
+      }
+      if (numeric.test(value as string)) {
         return 'number';
       }
       return 'string';
@@ -334,9 +336,11 @@ function identify(value: unknown, identifyArrays = true): IdentifiedType {
     case 'object': {
       if (value === null) {
         return 'null';
-      } else if (isDate(value)) {
+      }
+      if (isDate(value)) {
         return 'date';
-      } else if (identifyArrays && Array.isArray(value)) {
+      }
+      if (identifyArrays && Array.isArray(value)) {
         const arrayTypes = new Set<IdentifiedType>();
         for (const val of value) {
           arrayTypes.add(identify(val, false));

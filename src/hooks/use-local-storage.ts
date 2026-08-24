@@ -41,9 +41,9 @@ export function useLocalStorage<T extends JSONValue>(
       if (item) {
         return JSON.parse(item);
       }
-      return isFunction(initialState) ? (initialState as () => T)() : initialState;
+      return isFunction(initialState) ? initialState() : initialState;
     } catch {
-      return isFunction(initialState) ? (initialState as () => T)() : initialState;
+      return isFunction(initialState) ? initialState() : initialState;
     }
   });
 

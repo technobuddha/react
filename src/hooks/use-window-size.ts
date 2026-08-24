@@ -35,7 +35,7 @@ export function useWindowSize(): ElementSize & {
 
     // Use ResizeObserver for robust resize detection
     const observer = new ResizeObserver(handler);
-    observer.observe(globalThis.window.document.documentElement);
+    observer.observe(document.documentElement);
 
     return () => {
       if (handler) {
