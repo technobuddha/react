@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@technobuddha/react",
-  "version": "1.0.0-2",
+  "version": "1.0.0-3",
   "description": "Technobuddha React Library",
   "license": "MIT",
   "type": "module",
@@ -32,7 +32,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@technobuddha/library": "2.1.0-189",
+    "@technobuddha/library": "2.1.0-190",
     "clsx": "2.1.1",
     "query-string": "9.3.1",
     "react-window": "1.8.11",
@@ -42,7 +42,7 @@
     "@cspell/cspell-types": "10.1.1",
     "@mui/material": "7.3.10",
     "@mui/styles": "6.5.0",
-    "@technobuddha/project": "1.0.0-196",
+    "@technobuddha/project": "1.0.0-197",
     "@types/node": "26.3.0",
     "@types/react": "19.2.14",
     "@types/react-window": "1.8.8",
