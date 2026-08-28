@@ -1,6 +1,6 @@
-//@ts-check
-/** @type import('@technobuddha/project').TechnobuddhaConfig */
-const config = {
+import { defineConfig } from '@technobuddha/project/config';
+
+export default defineConfig({
   directories: {
     src: {
       platform: 'vite-client',
@@ -9,8 +9,6 @@ const config = {
   lint: {
     rules: {
       'no-bitwise': { rule: 'off' },
-    }
-  }
-};
-
-export default config;
+    },
+  },
+});

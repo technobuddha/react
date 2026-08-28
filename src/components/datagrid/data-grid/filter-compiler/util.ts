@@ -9,6 +9,7 @@ export function getUniqueValues<T = unknown>(data: T[], name: keyof T): string[]
       if (isArray(v)) {
         for (const vv of v) {
           if (vv != null) {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string
             set.add(vv.toString());
           }
         }
