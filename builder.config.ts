@@ -1,5 +1,6 @@
-/** @type import('\@technobuddha/project/build').Builds */
-const config = {
+import { defineBuilds } from '@technobuddha/project/build';
+
+export default defineBuilds({
   default: {
     steps: [
       {
@@ -25,6 +26,4 @@ const config = {
       },
     ],
   },
-};
-
-export default config;
+});
