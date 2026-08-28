@@ -1,4 +1,12 @@
-import { isDate, isNumber, isObject, isoDate, isString, numeric } from '@technobuddha/library';
+import {
+  isArray,
+  isDate,
+  isNumber,
+  isObject,
+  isoDate,
+  isString,
+  numeric,
+} from '@technobuddha/library';
 
 import { type Column, type ColumnSpecifications, type ColumnType } from './column.ts';
 import { collatorFactory, headerFactory, rendererFactory } from './column-compiler/index.ts';
@@ -195,7 +203,7 @@ function analyze<T = unknown>({
       } else {
         used.add(column.name.toString());
 
-        if (Array.isArray(column.sortBy)) {
+        if (isArray(column.sortBy)) {
           for (const sort of column.sortBy) {
             used.add(sort.toString());
           }
@@ -221,7 +229,7 @@ function analyze<T = unknown>({
       }
 
       shapes.add('key-value');
-    } else if (Array.isArray(datum)) {
+    } else if (isArray(datum)) {
       for (const [i, element] of datum.entries()) {
         const key = i.toString();
 
@@ -340,7 +348,7 @@ function identify(value: unknown, identifyArrays = true): IdentifiedType {
       if (isDate(value)) {
         return 'date';
       }
-      if (identifyArrays && Array.isArray(value)) {
+      if (identifyArrays && isArray(value)) {
         const arrayTypes = new Set<IdentifiedType>();
         for (const val of value) {
           arrayTypes.add(identify(val, false));

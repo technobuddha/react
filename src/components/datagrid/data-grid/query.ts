@@ -1,3 +1,4 @@
+import { isArray } from '@technobuddha/library';
 import queryString, { type ParsedQuery } from 'query-string';
 
 /**
@@ -97,7 +98,7 @@ export function getSortFromQueryString(): SortKey | undefined {
   if (!sort) {
     return undefined;
   }
-  if (Array.isArray(sort)) {
+  if (isArray(sort)) {
     return decodeSort(sort[0]);
   }
 

@@ -1,4 +1,4 @@
-import { toString } from '@technobuddha/library';
+import { isArray, toString } from '@technobuddha/library';
 
 import { type Shape } from '../../analyzer.ts';
 import { type FilterValue } from '../../filter/index.ts';
@@ -37,7 +37,7 @@ export function searchExecute<T = unknown>(
           return data.filter((datum) => {
             const field = datum[name];
 
-            return Array.isArray(field) ?
+            return isArray(field) ?
                 field.some((f) => toString(f).toLocaleLowerCase().includes(search))
               : toString(field).toLocaleLowerCase().includes(search);
           });
@@ -59,7 +59,7 @@ export function searchExecute<T = unknown>(
           return data.filter((datum) => {
             const field = (datum as unknown as unknown[])[key];
 
-            return Array.isArray(field) ?
+            return isArray(field) ?
                 field.some((f) => toString(f).toLocaleLowerCase().includes(search))
               : toString(field).toLocaleLowerCase().includes(search);
           });
@@ -116,7 +116,7 @@ export function equalityExecute<T = unknown>(
           return data.filter((datum) => {
             const field = datum[name];
 
-            return Array.isArray(field) ?
+            return isArray(field) ?
                 field.some((f) => filterValue.includes(toString(f)))
               : filterValue.includes(toString(field));
           });
@@ -136,7 +136,7 @@ export function equalityExecute<T = unknown>(
           return data.filter((datum) => {
             const field = (datum as unknown as unknown[])[key];
 
-            return Array.isArray(field) ?
+            return isArray(field) ?
                 field.some((f) => filterValue.includes(toString(f)))
               : filterValue.includes(toString(field));
           });

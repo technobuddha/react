@@ -1,6 +1,7 @@
 // cspell:ignore Stringize
 
 import React from 'react';
+import { isArray } from '@technobuddha/library';
 
 import { useGrid } from '../grid-context.tsx';
 
@@ -128,7 +129,7 @@ function queryStringizeFilterValue<T = unknown>(filterValues: FilterValues<T>): 
         if (v === null) {
           return [k, null];
         }
-        if (Array.isArray(v)) {
+        if (isArray(v)) {
           return [k, v.join('&')];
         }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { isDate, isEmpty, isObject, toDate, toString } from '@technobuddha/library';
+import { isArray, isDate, isEmpty, isObject, toDate, toString } from '@technobuddha/library';
 import clsx from 'clsx';
 
 import { type DataType } from './data-grid/index.ts';
@@ -159,7 +159,7 @@ export const Anything: React.FC<AnythingParams> = ({
     return <div className={clsx(className, css.null, className)}>&nbsp;</div>;
   }
 
-  if (Array.isArray(children)) {
+  if (isArray(children)) {
     return (
       <div className={clsx(css.array, className, top && css.top)}>
         {children.map((datum, index) => (

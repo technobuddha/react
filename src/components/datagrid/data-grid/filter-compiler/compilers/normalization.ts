@@ -1,4 +1,4 @@
-import { isString } from '@technobuddha/library';
+import { isArray, isString } from '@technobuddha/library';
 
 import { type FilterValue } from '../../filter/index.ts';
 
@@ -17,7 +17,7 @@ import { type FilterValue } from '../../filter/index.ts';
  * @category DataGrid
  */
 export const normalizeFilterValue = (filterValue: FilterValue): string | null =>
-  Array.isArray(filterValue) ?
+  isArray(filterValue) ?
     filterValue.length > 0 ?
       filterValue[0]
     : null
@@ -38,7 +38,7 @@ export const normalizeFilterValue = (filterValue: FilterValue): string | null =>
  * @category DataGrid
  */
 export const normalizeFilterArray = (filterValue: FilterValue): string[] | null =>
-  Array.isArray(filterValue) ?
+  isArray(filterValue) ?
     filterValue.length > 0 ?
       filterValue
     : null

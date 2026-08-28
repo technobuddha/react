@@ -1,4 +1,5 @@
 import React from 'react';
+import { isArray } from '@technobuddha/library';
 
 import { type OnSelectionChangedParams } from './data-grid.tsx';
 import { useGrid } from './grid-context.tsx';
@@ -212,7 +213,7 @@ export function RowProvider<T = unknown>({
 
   const setSelected = React.useCallback(
     (row: T | T[], isSelected: boolean) => {
-      if (Array.isArray(row)) {
+      if (isArray(row)) {
         for (const datum of row) {
           setDatumSelected(datum, isSelected);
         }
